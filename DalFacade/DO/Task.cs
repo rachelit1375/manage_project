@@ -4,7 +4,7 @@ namespace DO;
 
 public record Task
 (
-
+    int Id,
     string? Description,
     ///Task description
     string? Alias,///The name of the task
@@ -16,6 +16,6 @@ public record Task
     DateTime? Deadline,///end date
     string? Complete,///the result of the task
     string? Remarks,///Notes on the task
-    int EngineerId,///The ID of the engineer responsible for the task
-    EngineerExperience ComplexityLevel//difficulty level
+    int? EngineerId///The ID of the engineer responsible for the task
+   // EngineerExperience ComplexityLevel//difficulty level
 );
