@@ -9,27 +9,40 @@ public class EngineerImplementation : IEngineer
 {
     public int Create(Engineer item)
     {
-        throw new NotImplementedException();
+        if (Read(item.Id) != null)
+            throw new Exception($"An Engineers With Id= {item.Id} Already Exist");
+        DataSource.Engineers.Add(item);
+        return item.Id;
     }
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        Engineer? removeEngineer = Read(id);
+        if (removeEngineer == null)
+            throw new Exception($"An Engineers With Id= {id} Does Not Exist");
+
+        if (DataSource.Tasks.Find(x => x.EngineerId == id) != null)
+            throw new Exception("This Engineer Cannot Be Deleted");
+        DataSource.Engineers.Remove(removeEngineer);
     }
 
     public Engineer? Read(int id)
     {
-        throw new NotImplementedException();
+      return DataSource.Engineers.Find(x=> x.Id == id);
     }
 
     public List<Engineer> ReadAll()
     {
         return new List<Engineer>(DataSource.Engineers);
-        throw new NotImplementedException();
     }
 
     public void Update(Engineer item)
     {
-        throw new NotImplementedException();
+        Engineer? removeEngineer = Read(item.Id);
+        if (removeEngineer == null)
+            throw new Exception($"An Engineers With Id= {item.Id} Does Not Exist");
+
+        DataSource.Engineers.Remove(removeEngineer);
+        DataSource.Engineers.Add(item);
     }
 }
