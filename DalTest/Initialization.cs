@@ -13,6 +13,14 @@ public static class Initialization
     private static IDependence? s_dalDependence;
     private static IEngineer? s_dalEngineer;
     private static readonly Random s_rand = new();
+    public static void Do(ITask? dalTask, IDependence? dalDependence, IEngineer? dalEngineer)
+    {
+        s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
+        s_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");
+        s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
+        createEngineers();
+        createTasks();
+    }
     private static void createEngineers()
     {
         (string name, string email)[] engineerNames =
@@ -33,7 +41,7 @@ public static class Initialization
             do
                 id = s_rand.Next(200000000, 400000000);
             while (s_dalEngineer!.Read(id) != null);
-            level = (EngineerExperience)s_rand.Next(0, 3);
+            level = (EngineerExperience)s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());
             Engineer engineer = new(id, engineerName.name, engineerName.email, level, null);
         }
     }
@@ -54,7 +62,7 @@ public static class Initialization
         EngineerExperience level;
         int id;
 
-        foreach (var task in tasks)//לוודא שלא בעיה לקרוא לרבים עם es
+        foreach (var task in tasks)
         {
             do
             {
