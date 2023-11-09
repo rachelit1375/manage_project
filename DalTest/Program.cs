@@ -311,3 +311,4 @@ class Program
 
     }
 }///initialization לא עובד- לא קיים במאגר
+///הערות
