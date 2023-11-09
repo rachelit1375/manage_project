@@ -12,9 +12,9 @@ public record Task
     DateTime? CreateAt,///Task creation date
     DateTime? Start,///The date of the start of the execution of the task
     DateTime? ScheduledDate,//Estimated date for completion of the task
-    DateTime? ForecastDate,///Final date of completion
     DateTime? Deadline,///end date
-    string? Complete,///the result of the task
+    DateTime? Complete,///Final date of completion
+    string? Deliverables,///the result of the task
     string? Remarks,///Notes on the task
     int? EngineerId,///The ID of the engineer responsible for the task
     EngineerExperience? ComplexityLevel//difficulty level
