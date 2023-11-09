@@ -49,14 +49,14 @@ public static class Initialization
     {
         (string taskAlias, string description)[] tasks =
           {
-           ("Racheli Toledano", "racheli@gmail.com"),
-           ("Osnat Shachor", "osnaty@gmail.com"),
-           ("Dani Levi", "Dani@gmail.com"),
-           ("Eli Amar", "Eli@gmail.com"),
-           ("Yair Cohen","Yair@gmail.com"),
-           ("Ariela Levin","Ariel@gmail.com"),
-           ("Dina Klein", "Dina@gmail.com"),
-           ("Zundel Baruch", "Zundel@gmail.com")
+           ("Budget", "manage the budget"),
+           ("Permits","obtain building permits"),
+           ("Supervision","Supervise the construction"),
+           ("Flooring", "floor the apartment"),
+           ("Planning", "plan the form of construction"),
+           ("Kitchen", "design the kitchen"),
+           ("Bedroom", "design the bedroom"),
+           ("Living-room", "design the living room")
         };
 
         EngineerExperience level;

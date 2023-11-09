@@ -17,20 +17,20 @@ class Program
         {
             case 'a'://add
                 Console.WriteLine("enter Engineer's id to add");
-                int idEngineer = int.Parse(Console.ReadLine()!);
+                int idAdd = int.Parse(Console.ReadLine()!);
                 Console.WriteLine("enter Engineer's name");
-                string? nameEngineer = Console.ReadLine();
+                string? nameAdd = Console.ReadLine();
                 Console.WriteLine("enter Engineer's email");
-                string? emailEngineer = (Console.ReadLine());
+                string? emailAdd = (Console.ReadLine());
                 Console.WriteLine("enter Engineer's level(0-for expert,1-for Junior,2-for Rookie)");
-                EngineerExperience? levelEngineer = (EngineerExperience)int.Parse(Console.ReadLine()!);
+                EngineerExperience? levelAdd = (EngineerExperience)int.Parse(Console.ReadLine()!);
                 Console.WriteLine("enter Engineer's Cost");
-                double? costEngineer = double.Parse(Console.ReadLine()!);
-                Engineer engineer = new Engineer(idEngineer, nameEngineer!, emailEngineer, (EngineerExperience)levelEngineer, costEngineer);
+                double? costAdd = double.Parse(Console.ReadLine()!);
+                Engineer engineerAdd = new Engineer(idAdd, nameAdd!, emailAdd, (EngineerExperience)levelAdd, costAdd);
 
                 try
                 {
-                    s_dalEngineer!.Create(engineer);
+                    s_dalEngineer!.Create(engineerAdd);
                     Console.WriteLine("the engineer added");
                 }
                 catch (Exception ex)
@@ -39,10 +39,10 @@ class Program
                 }
                 break;
 
-            case 'b'://read by id
+            case 'b'://read
                 Console.WriteLine("enter engineer's id to read");
-                int id = int.Parse(Console.ReadLine()!);
-                Console.WriteLine(s_dalEngineer?.Read(id));              
+                int idRead = int.Parse(Console.ReadLine()!);
+                Console.WriteLine(s_dalEngineer?.Read(idRead));              
                 break;
 
             case 'c'://read all
@@ -54,21 +54,21 @@ class Program
 
             case 'd'://update
                 Console.WriteLine("enter id of engineer to update");
-                int idUpdate = int.Parse(Console.ReadLine()!);//search of the id to update
+                int idUpdate = int.Parse(Console.ReadLine()!);
                 try
                 {
                     Console.WriteLine(s_dalEngineer?.Read(idUpdate));
-                    int _id = idUpdate;
+
                     Console.WriteLine("enter Engineer's name");
-                    string? name = Console.ReadLine();
+                    string? nameUpdate = Console.ReadLine();
                     Console.WriteLine("enter Engineer's email");
-                    string? email = (Console.ReadLine());
+                    string? emailUpdate = (Console.ReadLine());
                     Console.WriteLine("enter Engineer's level(0-for expert,1-for Junior,2-for Rookie)");
-                    EngineerExperience? level = (EngineerExperience)int.Parse(Console.ReadLine()!);
+                    EngineerExperience? levelUpdate = (EngineerExperience)int.Parse(Console.ReadLine()!);
                     Console.WriteLine("enter Engineer's Cost");
-                    double? cost = double.Parse(Console.ReadLine()!);
-                    Engineer eUpdate = new Engineer(_id, name!, email, (EngineerExperience)level, cost);
-                    s_dalEngineer?.Update(eUpdate);
+                    double? costUpdate = double.Parse(Console.ReadLine()!);
+                    Engineer engineerUpdate = new Engineer(idUpdate, nameUpdate!, emailUpdate, (EngineerExperience)levelUpdate, costUpdate);
+                    s_dalEngineer?.Update(engineerUpdate);
                 }
                 catch (Exception ex)
                 {
@@ -76,7 +76,7 @@ class Program
                 }
                 break;
 
-            case 'e'://delete a product
+            case 'e'://delete
                 Console.WriteLine("enter id of engineer to delete");
                 int idDelete = int.Parse(Console.ReadLine()!);
                 try
@@ -101,39 +101,39 @@ class Program
 
             case 'a'://add
                 Console.WriteLine("enter task's description");
-                string _description = Console.ReadLine()!;
+                string descriptionAdd = Console.ReadLine()!;
                 Console.WriteLine("enter task's alias");
-                string _alias = Console.ReadLine()!;
+                string aliasAdd = Console.ReadLine()!;
                 Console.WriteLine("enter task's milestone");
-                bool _milestone = bool.Parse(Console.ReadLine()!);
+                bool milestoneAdd = bool.Parse(Console.ReadLine()!);
                 Console.WriteLine("enter task's date of created");
-                DateTime _createdAt = Convert.ToDateTime(Console.ReadLine());
+                DateTime createAdd = Convert.ToDateTime(Console.ReadLine());
                 Console.WriteLine("enter task's date of start");
-                DateTime? _start = Convert.ToDateTime(Console.ReadLine());
+                DateTime? startAdd = Convert.ToDateTime(Console.ReadLine());
                 Console.WriteLine("enter task's date of scheduled");
-                DateTime? _scheduledDate = Convert.ToDateTime(Console.ReadLine());
+                DateTime? scheduledAdd = Convert.ToDateTime(Console.ReadLine());
                 Console.WriteLine("enter task's date of deadline");
-                DateTime? _deadline = Convert.ToDateTime(Console.ReadLine());
+                DateTime? deadlineAdd = Convert.ToDateTime(Console.ReadLine());
                 Console.WriteLine("enter task's date of complete");
-                DateTime? _complete = Convert.ToDateTime(Console.ReadLine());
+                DateTime? completeAdd = Convert.ToDateTime(Console.ReadLine());
                 Console.WriteLine("enter task's deliverables");
-                string? _deliverables = Console.ReadLine();
+                string? deliverablesAdd = Console.ReadLine();
                 Console.WriteLine("enter task's remarks");
-                string? _remarks = Console.ReadLine();
+                string? remarksAdd = Console.ReadLine();
                 Console.WriteLine("enter task's engineerld");
-                int _engineerld = int.Parse(Console.ReadLine()!);
+                int engineerldAdd = int.Parse(Console.ReadLine()!);
                 Console.WriteLine("enter task's level(0-for expert,1-for Junior,2-for Rookie)");
-                EngineerExperience? _complexityLevel = (EngineerExperience)int.Parse(Console.ReadLine()!);
+                EngineerExperience? levelAdd = (EngineerExperience)int.Parse(Console.ReadLine()!);
 
-                DO.Task task = new DO.Task(111, _description, _alias, _milestone, _createdAt, _start, _scheduledDate, _deadline, _complete, _deliverables, _remarks, _engineerld, _complexityLevel);
+                DO.Task task = new DO.Task(111, descriptionAdd, aliasAdd, milestoneAdd, createAdd, startAdd, scheduledAdd, deadlineAdd, completeAdd, deliverablesAdd, remarksAdd, engineerldAdd, levelAdd);
                
                 s_dalTask!.Create(task);
                 break;
 
-            case 'b'://read by id
+            case 'b'://read
                 Console.WriteLine("enter task's number to read");
-                int id = int.Parse(Console.ReadLine()!);            
-                Console.WriteLine(s_dalTask?.Read(id));              
+                int idRead = int.Parse(Console.ReadLine()!);            
+                Console.WriteLine(s_dalTask?.Read(idRead));              
                 break;
 
             case 'c'://read all
@@ -148,32 +148,33 @@ class Program
                 try
                 {
                     Console.WriteLine(s_dalTask?.Read(idUpdate));
-                    int _id = idUpdate;
+
                     Console.WriteLine("enter task's description");
-                    string description = Console.ReadLine()!;
+                    string descriptionUpdate = Console.ReadLine()!;
                     Console.WriteLine("enter task's alias");
-                    string alias = Console.ReadLine()!;
-                    Console.WriteLine("enter task's engineerld");
-                    int engineerld = int.Parse(Console.ReadLine()!);
+                    string aliasUpdate = Console.ReadLine()!;                    
                     Console.WriteLine("enter task's milestone");
-                    bool milestone = bool.Parse(Console.ReadLine()!);
+                    bool milestoneUpdate = bool.Parse(Console.ReadLine()!);
                     Console.WriteLine("enter task's date of created");
-                    DateTime createdAt = Convert.ToDateTime(Console.ReadLine());
+                    DateTime createUpdate = Convert.ToDateTime(Console.ReadLine());
                     Console.WriteLine("enter task's date of start");
-                    DateTime? start = Convert.ToDateTime(Console.ReadLine());
+                    DateTime? startUpdate = Convert.ToDateTime(Console.ReadLine());
                     Console.WriteLine("enter task's date of scheduled");
-                    DateTime? scheduledDate = Convert.ToDateTime(Console.ReadLine());
+                    DateTime? scheduledUpdate = Convert.ToDateTime(Console.ReadLine());
                     Console.WriteLine("enter task's date of deadline");
-                    DateTime? deadline = Convert.ToDateTime(Console.ReadLine());
+                    DateTime? deadlineUpdate = Convert.ToDateTime(Console.ReadLine());
                     Console.WriteLine("enter task's date of complete");
-                    DateTime? complete = Convert.ToDateTime(Console.ReadLine());
+                    DateTime? completeUpdate = Convert.ToDateTime(Console.ReadLine());
                     Console.WriteLine("enter task's deliverables");
-                    string? deliverables = Console.ReadLine();
+                    string? deliverablesUpdate = Console.ReadLine();
                     Console.WriteLine("enter task's remarks");
-                    string? remarks = Console.ReadLine();
+                    string? remarksUpdate = Console.ReadLine();
+                    Console.WriteLine("enter task's engineerld");
+                    int engineerldUpdate = int.Parse(Console.ReadLine()!); 
                     Console.WriteLine("enter task's level(0-for expert,1-for Junior,2-for Rookie)");
-                    EngineerExperience? complexityLevel = (EngineerExperience)int.Parse(Console.ReadLine());
-                    DO.Task taskUpdate = new DO.Task(_id, description, alias,  milestone, createdAt, start, scheduledDate, deadline, complete, deliverables, remarks, engineerld, complexityLevel);
+                    EngineerExperience? levelUpdate = (EngineerExperience)int.Parse(Console.ReadLine()!);
+
+                    DO.Task taskUpdate = new DO.Task(idUpdate, descriptionUpdate, aliasUpdate, milestoneUpdate, createUpdate, startUpdate, scheduledUpdate, deadlineUpdate, completeUpdate, deliverablesUpdate, remarksUpdate, engineerldUpdate, levelUpdate);
                     s_dalTask!.Update(taskUpdate);
                 }
                 catch (Exception ex)
@@ -182,12 +183,12 @@ class Program
                 }
                 break;
 
-            case 'e'://delete an order
+            case 'e'://delete
                 Console.WriteLine("enter id of task to delete");
                 int idDelete = int.Parse(Console.ReadLine()!);
                 try
                 {
-                    s_dalTask?.Delete(idDelete);//לבדוק
+                    s_dalTask?.Delete(idDelete);
                 }
                 catch (Exception ex)
                 {
@@ -204,38 +205,38 @@ class Program
         {
             case 'a'://add
                 Console.WriteLine("enter dependent task's id");
-                int _dependentTask = int.Parse(Console.ReadLine()!);
+                int dependentTaskAdd = int.Parse(Console.ReadLine()!);
                 Console.WriteLine("enter depends on task's id");
-                int _dependsOnTask = int.Parse(Console.ReadLine()!);
-                Dependence dep = new Dependence(121, _dependentTask, _dependsOnTask);              
-                s_dalDependence!.Create(dep);// ?/!              
+                int dependsOnTaskAdd = int.Parse(Console.ReadLine()!);
+                Dependence dependenceAdd = new Dependence(121, dependentTaskAdd, dependsOnTaskAdd);              
+                s_dalDependence!.Create(dependenceAdd);// ?/!              
                 break;
 
-            case 'b'://read by id
-                Console.WriteLine("enter dependency's id to read");
-                int id = int.Parse(Console.ReadLine()!);               
-                Console.WriteLine(s_dalDependence?.Read(id));              
+            case 'b'://read
+                Console.WriteLine("enter dependence's id to read");
+                int idRead = int.Parse(Console.ReadLine()!);               
+                Console.WriteLine(s_dalDependence?.Read(idRead));              
                 break;
 
             case 'c'://read all
-                Console.WriteLine("all the dependencys:");
-                List<DO.Dependence> listReadAllDependencys = s_dalDependence!.ReadAll();
-                foreach (var item in listReadAllDependencys)
+                Console.WriteLine("all the dependences:");
+                List<DO.Dependence> listReadAllDependences = s_dalDependence!.ReadAll();
+                foreach (var item in listReadAllDependences)
                     Console.WriteLine(item);
                 break;
 
             case 'd'://update
-                Console.WriteLine("enter id of dependency to update");
+                Console.WriteLine("enter id of dependence to update");
                 int idUpdate = int.Parse(Console.ReadLine()!);//search of the id to update
                 try
                 {
                     Console.WriteLine(s_dalDependence?.Read(idUpdate));
-                    int _id = idUpdate;
+
                     Console.WriteLine("enter dependent task's id");
-                    int dependentTask = int.Parse(Console.ReadLine()!);
+                    int dependentTaskUpdate = int.Parse(Console.ReadLine()!);
                     Console.WriteLine("enter depends on task's id");
-                    int dependsOnTask = int.Parse(Console.ReadLine()!);
-                    Dependence depUpdate = new Dependence(_id, dependentTask, dependsOnTask);
+                    int dependsOnTaskUpdate = int.Parse(Console.ReadLine()!);
+                    Dependence depUpdate = new Dependence(idUpdate, dependentTaskUpdate, dependsOnTaskUpdate);
                     s_dalDependence!.Update(depUpdate);
                 }
                 catch (Exception ex)
@@ -265,7 +266,7 @@ class Program
         Initialization.Do(s_dalTask, s_dalDependence, s_dalEngineer);
         Console.WriteLine("for engineer press 1");
         Console.WriteLine("for task press 2");
-        Console.WriteLine("for Dependence in order press 3");
+        Console.WriteLine("for Dependence of tasks press 3");
         Console.WriteLine("for exit press 0");
         int choose = int.Parse(Console.ReadLine()!);
         char x;
@@ -295,7 +296,7 @@ class Program
                     Console.WriteLine("for add an dependence of tasks press a");
                     Console.WriteLine("for read dependence of tasks press b");
                     Console.WriteLine("for read all dependences of tasks press c");
-                    Console.WriteLine("for update a dependence in task press d");
+                    Console.WriteLine("for update a dependence of task press d");
                     Console.WriteLine("for delete a dependence of tasks press e");
                  
                     x = char.Parse(Console.ReadLine()!);
@@ -304,9 +305,9 @@ class Program
                 default:
                     break;
             }
-            Console.WriteLine("enter a number");
+            Console.WriteLine("enter your choose");
             choose = int.Parse(Console.ReadLine()!);
         }
 
     }
-}
+}///initialization לא עובד- לא קיים במאגר
