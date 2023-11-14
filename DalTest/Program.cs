@@ -57,16 +57,27 @@ class Program
                 int idUpdate = int.Parse(Console.ReadLine()!);
                 try
                 {
-                    Console.WriteLine(s_dalEngineer?.Read(idUpdate));
+                    Engineer? lastEngineer = s_dalEngineer?.Read(idUpdate);
+                    if (lastEngineer==null)
+                    {
+                        Console.WriteLine("An Engineers With such Id Does Not Exist");
+                        break;
+                    }
+                    Console.WriteLine(lastEngineer);
 
                     Console.WriteLine("enter Engineer's name");
                     string? nameUpdate = Console.ReadLine();
+                    if (nameUpdate == "")
+                        nameUpdate = lastEngineer.Name;
                     Console.WriteLine("enter Engineer's email");
                     string? emailUpdate = (Console.ReadLine());
+                    if (emailUpdate == "")
+                        emailUpdate = lastEngineer.Email;
                     Console.WriteLine("enter Engineer's level(0-for expert,1-for Junior,2-for Rookie)");
-                    EngineerExperience? levelUpdate = (EngineerExperience)int.Parse(Console.ReadLine()!);
+                    EngineerExperience levelUpdate = (EngineerExperience)int.Parse(Console.ReadLine()!);
                     Console.WriteLine("enter Engineer's Cost");
                     double? costUpdate = double.Parse(Console.ReadLine()!);
+                    costUpdate ??= lastEngineer.Cost;
                     Engineer engineerUpdate = new Engineer(idUpdate, nameUpdate!, emailUpdate, (EngineerExperience)levelUpdate, costUpdate);
                     s_dalEngineer?.Update(engineerUpdate);
                 }
@@ -143,37 +154,52 @@ class Program
                     Console.WriteLine(item);
                 break;
             case 'd'://update!!
-                Console.WriteLine("enter id of task to update");
+                Console.WriteLine("enter number of task to update");
                 int idUpdate = int.Parse(Console.ReadLine()!);//search of the id to update
                 try
                 {
-                    Console.WriteLine(s_dalTask?.Read(idUpdate));
+                    DO.Task? upTask = s_dalTask?.Read(idUpdate);
+                    if (upTask == null)
+                    {
+                        Console.WriteLine("A Task With such number Does Not Exist");
+                        break;
+                    }
 
+                    Console.WriteLine(upTask);
                     Console.WriteLine("enter task's description");
-                    string descriptionUpdate = Console.ReadLine()!;
+                    string? descriptionUpdate = Console.ReadLine();
+                    if (descriptionUpdate == "")
+                        descriptionUpdate = upTask.Description;
                     Console.WriteLine("enter task's alias");
-                    string aliasUpdate = Console.ReadLine()!;                    
+                    string? aliasUpdate = Console.ReadLine();
+                    if (aliasUpdate == "")
+                        aliasUpdate = upTask.Alias;
                     Console.WriteLine("enter task's milestone");
-                    bool milestoneUpdate = bool.Parse(Console.ReadLine()!);
+                    bool milestoneUpdate = bool.Parse(Console.ReadLine()!);//אם לא הוכנס לתא, מה עושים?
                     Console.WriteLine("enter task's date of created");
-                    DateTime createUpdate = Convert.ToDateTime(Console.ReadLine());
+                    DateTime? createUpdate = Convert.ToDateTime(Console.ReadLine());                  
                     Console.WriteLine("enter task's date of start");
-                    DateTime? startUpdate = Convert.ToDateTime(Console.ReadLine());
+                    DateTime? startUpdate = Convert.ToDateTime(Console.ReadLine());                    
                     Console.WriteLine("enter task's date of scheduled");
-                    DateTime? scheduledUpdate = Convert.ToDateTime(Console.ReadLine());
+                    DateTime? scheduledUpdate = Convert.ToDateTime(Console.ReadLine());                   
                     Console.WriteLine("enter task's date of deadline");
-                    DateTime? deadlineUpdate = Convert.ToDateTime(Console.ReadLine());
+                    DateTime? deadlineUpdate = Convert.ToDateTime(Console.ReadLine());                   
                     Console.WriteLine("enter task's date of complete");
-                    DateTime? completeUpdate = Convert.ToDateTime(Console.ReadLine());
+                    DateTime? completeUpdate = Convert.ToDateTime(Console.ReadLine());                  
                     Console.WriteLine("enter task's deliverables");
                     string? deliverablesUpdate = Console.ReadLine();
+                    if (deliverablesUpdate == "")
+                        deliverablesUpdate = upTask.Deliverables;
                     Console.WriteLine("enter task's remarks");
                     string? remarksUpdate = Console.ReadLine();
+                    if (remarksUpdate == "")
+                        remarksUpdate = upTask.Remarks;
                     Console.WriteLine("enter task's engineerld");
-                    int engineerldUpdate = int.Parse(Console.ReadLine()!); 
+                    int? engineerldUpdate = int.Parse(Console.ReadLine()!);
+                    if (engineerldUpdate == null)
+                        engineerldUpdate = upTask.EngineerId;
                     Console.WriteLine("enter task's level(0-for expert,1-for Junior,2-for Rookie)");
-                    EngineerExperience? levelUpdate = (EngineerExperience)int.Parse(Console.ReadLine()!);
-
+                    EngineerExperience? levelUpdate = (EngineerExperience)int.Parse(Console.ReadLine()!);                 
                     DO.Task taskUpdate = new DO.Task(idUpdate, descriptionUpdate, aliasUpdate, milestoneUpdate, createUpdate, startUpdate, scheduledUpdate, deadlineUpdate, completeUpdate, deliverablesUpdate, remarksUpdate, engineerldUpdate, levelUpdate);
                     s_dalTask!.Update(taskUpdate);
                 }

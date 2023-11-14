@@ -2,15 +2,17 @@
 namespace DalTest;
 using DalApi;
 using DO;
+using System.Reflection.Emit;
+using System.Threading.Tasks;
 
 /// <summary>
 /// 
 /// </summary>
 public static class Initialization
 {
-    private static ITask? s_dalTask;
-    private static IDependence? s_dalDependence;
-    private static IEngineer? s_dalEngineer;
+    private static ITask? s_dalTask = null;
+    private static IDependence? s_dalDependence = null;
+    private static IEngineer? s_dalEngineer = null;
     private static readonly Random s_rand = new();
     public static void Do(ITask? dalTask, IDependence? dalDependence, IEngineer? dalEngineer)
     {
@@ -19,6 +21,7 @@ public static class Initialization
         s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
         createEngineers();
         createTasks();
+        createDependences();
     }
     private static void createEngineers()
     {
@@ -42,6 +45,7 @@ public static class Initialization
             while (s_dalEngineer!.Read(id) != null);
             level = (EngineerExperience)s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());
             Engineer engineer = new(id, engineerName.name, engineerName.email, level, null);
+            s_dalEngineer!.Create(engineer);
         }
     }
     private static void createTasks()
@@ -75,11 +79,32 @@ public static class Initialization
             DateTime complete = createDate.AddDays(s_rand.Next(11, 61));
             DateTime deadLineDate = complete.AddDays(s_rand.Next(0, 20));
             level = (EngineerExperience)s_rand.Next(0, 3);
-            Task newTask = new(id, task.description, task.taskAlias, false, createDate, startDate, ScheduledDate, deadLineDate, complete, null, null, null, level);
+            Task newTask =new(id,task.description, task.taskAlias, false, createDate,startDate, ScheduledDate, deadLineDate, complete, null, null,null,level);
             s_dalTask!.Create(newTask);
+        }
+    }
+    private static void createDependences()
+    {
+        (int dependentOnTask, int dependentTask)[] dependencesNums =
+          {
+           (1000,1001),
+           (1002,1003),
+           (1003,1004),
+           (1004, 1005)
+        };
+        int id;
 
+        foreach (var dependencesNum in dependencesNums)
+        {
+            do
+            {
+                id = s_rand.Next(1, 10);
+            }
+            while (s_dalDependence!.Read(id) != null);
+            Dependence newDependence = new(id, dependencesNum.dependentOnTask, dependencesNum.dependentTask);
+            s_dalDependence!.Create(newDependence);
         }
     }
 
-
+   
 }
