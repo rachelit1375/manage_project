@@ -23,10 +23,10 @@ public static class Initialization
         createTasks();
         createDependences();
     }
-    private static void createEngineers()
+    private static void createEngineers()//Initializes a list of engineers
     {
         (string name, string email)[] engineerNames =
-        {
+        {//An array of engineers
            ("Racheli Toledano", "racheli@gmail.com"),
            ("Osnat Shachor", "osnaty@gmail.com"),
            ("Dani Levi", "Dani@gmail.com"),
@@ -42,16 +42,16 @@ public static class Initialization
         {
             do
                 id = s_rand.Next(200000000, 400000000);
-            while (s_dalEngineer!.Read(id) != null);
-            level = (EngineerExperience)s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());
+            while (s_dalEngineer!.Read(id) != null);//As long as he didn't find a new ID
+            level = (EngineerExperience)s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());//Engineer level
             Engineer engineer = new(id, engineerName.name, engineerName.email, level, null);
             s_dalEngineer!.Create(engineer);
         }
     }
-    private static void createTasks()
+    private static void createTasks()//Initializes a list of tasks
     {
         (string taskAlias, string description)[] tasks =
-          {
+          {//array
            ("Budget", "manage the budget"),
            ("Permits","obtain building permits"),
            ("Supervision","Supervise the construction"),
@@ -71,7 +71,7 @@ public static class Initialization
             {
                 id = s_rand.Next(1000, 10000);
             }
-            while (s_dalTask!.Read(id) != null);
+            while (s_dalTask!.Read(id) != null);//As long as he didn't find a new ID
 
             DateTime createDate = DateTime.Now;
             DateTime startDate = createDate.AddDays(s_rand.Next(0, 11));
@@ -79,14 +79,14 @@ public static class Initialization
             DateTime complete = createDate.AddDays(s_rand.Next(11, 61));
             DateTime deadLineDate = complete.AddDays(s_rand.Next(0, 20));
             level = (EngineerExperience)s_rand.Next(0, 3);
-            Task newTask =new(id,task.description, task.taskAlias, false, createDate,startDate, ScheduledDate, deadLineDate, complete, null, null,null,level);
+            DO.Task newTask =new(id,task.description, task.taskAlias, false, createDate,startDate, ScheduledDate, deadLineDate, complete, null, null,null,level);
             s_dalTask!.Create(newTask);
         }
     }
-    private static void createDependences()
+    private static void createDependences()//Initializes a list of Dependences
     {
         (int dependentOnTask, int dependentTask)[] dependencesNums =
-          {
+          {//array
            (1000,1001),
            (1002,1003),
            (1003,1004),
@@ -100,7 +100,7 @@ public static class Initialization
             {
                 id = s_rand.Next(1, 10);
             }
-            while (s_dalDependence!.Read(id) != null);
+            while (s_dalDependence!.Read(id) != null);//Temporary ID until the running number is initialized
             Dependence newDependence = new(id, dependencesNum.dependentOnTask, dependencesNum.dependentTask);
             s_dalDependence!.Create(newDependence);
         }

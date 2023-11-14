@@ -11,7 +11,7 @@ class Program
     private static IDependence? s_dalDependence = new DependenceImplementation();
     private static IEngineer? s_dalEngineer = new EngineerImplementation();
 
-    public static void InfoOfEngineer(char x)
+    public static void InfoOfEngineer(char x)////The function that manages the Engineer's menu
     {
         switch (x)
         {
@@ -30,7 +30,7 @@ class Program
 
                 try
                 {
-                    s_dalEngineer!.Create(engineerAdd);
+                    s_dalEngineer!.Create(engineerAdd);//Creating a new engineer
                     Console.WriteLine("the engineer added");
                 }
                 catch (Exception ex)
@@ -42,7 +42,7 @@ class Program
             case 'b'://read
                 Console.WriteLine("enter engineer's id to read");
                 int idRead = int.Parse(Console.ReadLine()!);
-                Console.WriteLine(s_dalEngineer?.Read(idRead));              
+                Console.WriteLine(s_dalEngineer?.Read(idRead));//Introducing the engineer              
                 break;
 
             case 'c'://read all
@@ -58,7 +58,7 @@ class Program
                 try
                 {
                     Engineer? lastEngineer = s_dalEngineer?.Read(idUpdate);
-                    if (lastEngineer==null)
+                    if (lastEngineer==null)//If no engineer is found
                     {
                         Console.WriteLine("An Engineers With such Id Does Not Exist");
                         break;
@@ -67,7 +67,7 @@ class Program
 
                     Console.WriteLine("enter Engineer's name");
                     string? nameUpdate = Console.ReadLine();
-                    if (nameUpdate == "")
+                    if (nameUpdate == "")//If the user has not added details - will take from the engineer before the update
                         nameUpdate = lastEngineer.Name;
                     Console.WriteLine("enter Engineer's email");
                     string? emailUpdate = (Console.ReadLine());
@@ -79,7 +79,7 @@ class Program
                     double? costUpdate = double.Parse(Console.ReadLine()!);
                     costUpdate ??= lastEngineer.Cost;
                     Engineer engineerUpdate = new Engineer(idUpdate, nameUpdate!, emailUpdate, (EngineerExperience)levelUpdate, costUpdate);
-                    s_dalEngineer?.Update(engineerUpdate);
+                    s_dalEngineer?.Update(engineerUpdate);//Updates the engineer
                 }
                 catch (Exception ex)
                 {
@@ -92,7 +92,7 @@ class Program
                 int idDelete = int.Parse(Console.ReadLine()!);
                 try
                 {
-                    s_dalEngineer?.Delete(idDelete);
+                    s_dalEngineer?.Delete(idDelete);//Deletes the engineer
                 }
                 catch (Exception ex)
                 {
@@ -105,11 +105,10 @@ class Program
         }
     }
 
-    public static void InfoOfTask(char x)
+    public static void InfoOfTask(char x)//The function that manages the task's menu
     {
         switch (x)
         {
-
             case 'a'://add
                 Console.WriteLine("enter task's description");
                 string descriptionAdd = Console.ReadLine()!;
@@ -136,15 +135,14 @@ class Program
                 Console.WriteLine("enter task's level(0-for expert,1-for Junior,2-for Rookie)");
                 EngineerExperience? levelAdd = (EngineerExperience)int.Parse(Console.ReadLine()!);
 
-                DO.Task task = new DO.Task(111, descriptionAdd, aliasAdd, milestoneAdd, createAdd, startAdd, scheduledAdd, deadlineAdd, completeAdd, deliverablesAdd, remarksAdd, engineerldAdd, levelAdd);
-               
+                DO.Task task = new DO.Task(111, descriptionAdd, aliasAdd, milestoneAdd, createAdd, startAdd, scheduledAdd, deadlineAdd, completeAdd, deliverablesAdd, remarksAdd, engineerldAdd, levelAdd);//Create a new task
                 s_dalTask!.Create(task);
                 break;
 
             case 'b'://read
                 Console.WriteLine("enter task's number to read");
                 int idRead = int.Parse(Console.ReadLine()!);            
-                Console.WriteLine(s_dalTask?.Read(idRead));              
+                Console.WriteLine(s_dalTask?.Read(idRead));// Presents the task             
                 break;
 
             case 'c'://read all
@@ -159,7 +157,7 @@ class Program
                 try
                 {
                     DO.Task? upTask = s_dalTask?.Read(idUpdate);
-                    if (upTask == null)
+                    if (upTask == null)//If the task number is not found
                     {
                         Console.WriteLine("A Task With such number Does Not Exist");
                         break;
@@ -168,7 +166,7 @@ class Program
                     Console.WriteLine(upTask);
                     Console.WriteLine("enter task's description");
                     string? descriptionUpdate = Console.ReadLine();
-                    if (descriptionUpdate == "")
+                    if (descriptionUpdate == "")// If the user has not added details - will take from the task before the update
                         descriptionUpdate = upTask.Description;
                     Console.WriteLine("enter task's alias");
                     string? aliasUpdate = Console.ReadLine();
@@ -225,14 +223,14 @@ class Program
                 break;
         }
     }
-    public static void InfoOfDependence(char x)
+    public static void InfoOfDependence(char x)//The function that manages the dependence's menu
     {
         switch (x)
         {
             case 'a'://add
-                Console.WriteLine("enter dependent task's id");
+                Console.WriteLine("enter dependence task's id");
                 int dependentTaskAdd = int.Parse(Console.ReadLine()!);
-                Console.WriteLine("enter depends on task's id");
+                Console.WriteLine("enter dependent on task's id");
                 int dependsOnTaskAdd = int.Parse(Console.ReadLine()!);
                 Dependence dependenceAdd = new Dependence(121, dependentTaskAdd, dependsOnTaskAdd);              
                 s_dalDependence!.Create(dependenceAdd);// ?/!              
@@ -296,7 +294,7 @@ class Program
         Console.WriteLine("for exit press 0");
         int choose = int.Parse(Console.ReadLine()!);
         char x;
-        while (choose != 0)
+        while (choose != 0)//As long as 0 was not pressed to exit
         {
             switch (choose)
             {
@@ -307,7 +305,7 @@ class Program
                     Console.WriteLine("for update an engineer press d");
                     Console.WriteLine("for delete an engineer press e");
                     x = char.Parse(Console.ReadLine()!);
-                    InfoOfEngineer(x);
+                    InfoOfEngineer(x);//The function that manages the engineer's menu
                     break;
                 case 2:
                     Console.WriteLine("for add a task press a");
@@ -316,7 +314,7 @@ class Program
                     Console.WriteLine("for update a task press d");
                     Console.WriteLine("for delete a task press e");
                     x = char.Parse(Console.ReadLine()!);
-                    InfoOfTask(x);  
+                    InfoOfTask(x);//The function that manages the task's menu  
                     break;
                 case 3:
                     Console.WriteLine("for add an dependence of tasks press a");
@@ -326,7 +324,7 @@ class Program
                     Console.WriteLine("for delete a dependence of tasks press e");
                  
                     x = char.Parse(Console.ReadLine()!);
-                    InfoOfDependence(x);
+                    InfoOfDependence(x);//The function that manages the Dependence's menu
                     break;
                 default:
                     break;
