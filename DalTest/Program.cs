@@ -306,7 +306,7 @@ class Program
                     break;
             }
             Console.WriteLine("enter your choose");
-            choose = int.Parse(Console.ReadLine()!);
+           x = char.Parse(Console.ReadLine()!);
         }
 
     }
