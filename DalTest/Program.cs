@@ -2,15 +2,15 @@
 using DalApi;
 using DO;
 using System.Xml.Linq;
-
+using DalList;
 namespace DalTest;
 
-class Program
+internal class Program
 {
-    private static ITask? s_dalTask = new TaskImplementation();
-    private static IDependence? s_dalDependence = new DependenceImplementation();
-    private static IEngineer? s_dalEngineer = new EngineerImplementation();
-
+    // private static ITask? s_dalTask = new TaskImplementation();
+    // private static IDependence? s_dalDependence = new DependenceImplementation();
+    // private static IEngineer? s_dalEngineer = new EngineerImplementation();
+    static readonly IDal s_dal = new DalListClass(); //stage 2
     public static void InfoOfEngineer(char x)////The function that manages the Engineer's menu
     {
         switch (x)
@@ -30,7 +30,7 @@ class Program
 
                 try
                 {
-                    s_dalEngineer!.Create(engineerAdd);//Creating a new engineer
+                    s_dal!.Engineer.Create(engineerAdd);//Creating a new engineer
                     Console.WriteLine("the engineer added");
                 }
                 catch (Exception ex)
@@ -42,12 +42,12 @@ class Program
             case 'b'://read
                 Console.WriteLine("enter engineer's id to read");
                 int idRead = int.Parse(Console.ReadLine()!);
-                Console.WriteLine(s_dalEngineer?.Read(idRead));//Introducing the engineer              
+                Console.WriteLine(s_dal?.Engineer?.Read(idRead));//Introducing the engineer              
                 break;
 
             case 'c'://read all
                 Console.WriteLine("all the engineers:");
-                List<Engineer> allEngineers = s_dalEngineer!.ReadAll();
+                List<Engineer> allEngineers = s_dal!.Engineer!.ReadAll();
                 foreach (var item in allEngineers)
                     Console.WriteLine(item);
                 break;
@@ -57,7 +57,7 @@ class Program
                 int idUpdate = int.Parse(Console.ReadLine()!);
                 try
                 {
-                    Engineer? lastEngineer = s_dalEngineer?.Read(idUpdate);
+                    Engineer? lastEngineer = s_dal.Engineer?.Read(idUpdate);
                     if (lastEngineer==null)//If no engineer is found
                     {
                         Console.WriteLine("An Engineers With such Id Does Not Exist");
@@ -79,7 +79,7 @@ class Program
                     double? costUpdate = double.Parse(Console.ReadLine()!);
                     costUpdate ??= lastEngineer.Cost;
                     Engineer engineerUpdate = new Engineer(idUpdate, nameUpdate!, emailUpdate, (EngineerExperience)levelUpdate, costUpdate);
-                    s_dalEngineer?.Update(engineerUpdate);//Updates the engineer
+                    s_dal.Engineer?.Update(engineerUpdate);//Updates the engineer
                 }
                 catch (Exception ex)
                 {
@@ -92,7 +92,7 @@ class Program
                 int idDelete = int.Parse(Console.ReadLine()!);
                 try
                 {
-                    s_dalEngineer?.Delete(idDelete);//Deletes the engineer
+                    s_dal.Engineer?.Delete(idDelete);//Deletes the engineer
                 }
                 catch (Exception ex)
                 {
@@ -136,18 +136,18 @@ class Program
                 EngineerExperience? levelAdd = (EngineerExperience)int.Parse(Console.ReadLine()!);
 
                 DO.Task task = new DO.Task(111, descriptionAdd, aliasAdd, milestoneAdd, createAdd, startAdd, scheduledAdd, deadlineAdd, completeAdd, deliverablesAdd, remarksAdd, engineerldAdd, levelAdd);//Create a new task
-                s_dalTask!.Create(task);
+                s_dal.Task!.Create(task);
                 break;
 
             case 'b'://read
                 Console.WriteLine("enter task's number to read");
                 int idRead = int.Parse(Console.ReadLine()!);            
-                Console.WriteLine(s_dalTask?.Read(idRead));// Presents the task             
+                Console.WriteLine(s_dal.Task?.Read(idRead));// Presents the task             
                 break;
 
             case 'c'://read all
                 Console.WriteLine("all the tasks with their customers:");
-                List<DO.Task> allTasks = s_dalTask!.ReadAll();
+                List<DO.Task> allTasks = s_dal.Task!.ReadAll();
                 foreach (var item in allTasks)
                     Console.WriteLine(item);
                 break;
@@ -156,7 +156,7 @@ class Program
                 int idUpdate = int.Parse(Console.ReadLine()!);//search of the id to update
                 try
                 {
-                    DO.Task? upTask = s_dalTask?.Read(idUpdate);
+                    DO.Task? upTask = s_dal.Task?.Read(idUpdate);
                     if (upTask == null)//If the task number is not found
                     {
                         Console.WriteLine("A Task With such number Does Not Exist");
@@ -199,7 +199,7 @@ class Program
                     Console.WriteLine("enter task's level(0-for expert,1-for Junior,2-for Rookie)");
                     EngineerExperience? levelUpdate = (EngineerExperience)int.Parse(Console.ReadLine()!);                 
                     DO.Task taskUpdate = new DO.Task(idUpdate, descriptionUpdate, aliasUpdate, milestoneUpdate, createUpdate, startUpdate, scheduledUpdate, deadlineUpdate, completeUpdate, deliverablesUpdate, remarksUpdate, engineerldUpdate, levelUpdate);
-                    s_dalTask!.Update(taskUpdate);
+                    s_dal.Task!.Update(taskUpdate);
                 }
                 catch (Exception ex)
                 {
@@ -212,7 +212,7 @@ class Program
                 int idDelete = int.Parse(Console.ReadLine()!);
                 try
                 {
-                    s_dalTask?.Delete(idDelete);
+                    s_dal.Task?.Delete(idDelete);
                 }
                 catch (Exception ex)
                 {
@@ -233,18 +233,18 @@ class Program
                 Console.WriteLine("enter dependent on task's id");
                 int dependsOnTaskAdd = int.Parse(Console.ReadLine()!);
                 Dependence dependenceAdd = new Dependence(121, dependentTaskAdd, dependsOnTaskAdd);              
-                s_dalDependence!.Create(dependenceAdd);// ?/!              
+                s_dal.Dependence!.Create(dependenceAdd);// ?/!              
                 break;
 
             case 'b'://read
                 Console.WriteLine("enter dependence's id to read");
                 int idRead = int.Parse(Console.ReadLine()!);               
-                Console.WriteLine(s_dalDependence?.Read(idRead));              
+                Console.WriteLine(s_dal.Dependence?.Read(idRead));              
                 break;
 
             case 'c'://read all
                 Console.WriteLine("all the dependences:");
-                List<DO.Dependence> listReadAllDependences = s_dalDependence!.ReadAll();
+                List<DO.Dependence> listReadAllDependences = s_dal.Dependence!.ReadAll();
                 foreach (var item in listReadAllDependences)
                     Console.WriteLine(item);
                 break;
@@ -254,14 +254,14 @@ class Program
                 int idUpdate = int.Parse(Console.ReadLine()!);//search of the id to update
                 try
                 {
-                    Console.WriteLine(s_dalDependence?.Read(idUpdate));
+                    Console.WriteLine(s_dal.Dependence?.Read(idUpdate));
 
                     Console.WriteLine("enter dependent task's id");
                     int dependentTaskUpdate = int.Parse(Console.ReadLine()!);
                     Console.WriteLine("enter depends on task's id");
                     int dependsOnTaskUpdate = int.Parse(Console.ReadLine()!);
                     Dependence depUpdate = new Dependence(idUpdate, dependentTaskUpdate, dependsOnTaskUpdate);
-                    s_dalDependence!.Update(depUpdate);
+                    s_dal.Dependence!.Update(depUpdate);
                 }
                 catch (Exception ex)
                 {
@@ -273,7 +273,7 @@ class Program
                 int idDelete = int.Parse(Console.ReadLine()!);
                 try
                 {
-                    s_dalDependence!.Delete(idDelete);
+                    s_dal.Dependence!.Delete(idDelete);
                 }
                 catch (Exception ex)
                 {
@@ -285,9 +285,9 @@ class Program
                 break;
         }
     }
-    public static void Main(string[] args)
+     static void Main(string[] args)
     {
-        Initialization.Do(s_dalTask, s_dalDependence, s_dalEngineer);
+        Initialization.Do(s_dal);
         Console.WriteLine("for engineer press 1");
         Console.WriteLine("for task press 2");
         Console.WriteLine("for Dependence of tasks press 3");
@@ -296,6 +296,7 @@ class Program
         char x;
         while (choose != 0)//As long as 0 was not pressed to exit
         {
+            
             switch (choose)
             {
                 case 1:
@@ -322,15 +323,17 @@ class Program
                     Console.WriteLine("for read all dependences of tasks press c");
                     Console.WriteLine("for update a dependence of task press d");
                     Console.WriteLine("for delete a dependence of tasks press e");
-                 
                     x = char.Parse(Console.ReadLine()!);
                     InfoOfDependence(x);//The function that manages the Dependence's menu
                     break;
                 default:
                     break;
             }
-            Console.WriteLine("enter your choose");
-           x = char.Parse(Console.ReadLine()!);
+            Console.WriteLine("for engineer press 1");
+            Console.WriteLine("for task press 2");
+            Console.WriteLine("for Dependence of tasks press 3");
+            Console.WriteLine("for exit press 0");
+            choose = int.Parse(Console.ReadLine()!);
         }
 
     }

@@ -10,15 +10,17 @@ using System.Threading.Tasks;
 /// </summary>
 public static class Initialization
 {
-    private static ITask? s_dalTask = null;
-    private static IDependence? s_dalDependence = null;
-    private static IEngineer? s_dalEngineer = null;
+   // private static ITask? s_dalTask = null;
+   // private static IDependence? s_dalDependence = null;
+    //private static IEngineer? s_dalEngineer = null;
+    private static IDal? s_dal; 
     private static readonly Random s_rand = new();
-    public static void Do(ITask? dalTask, IDependence? dalDependence, IEngineer? dalEngineer)
+    public static void Do(IDal dal) 
     {
-        s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
+       // s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
+      //  s_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");
+       // s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
+        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
         createEngineers();
         createTasks();
         createDependences();
@@ -42,10 +44,10 @@ public static class Initialization
         {
             do
                 id = s_rand.Next(200000000, 400000000);
-            while (s_dalEngineer!.Read(id) != null);//As long as he didn't find a new ID
+            while (s_dal!.Engineer.Read(id) != null);//As long as he didn't find a new ID
             level = (EngineerExperience)s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());//Engineer level
             Engineer engineer = new(id, engineerName.name, engineerName.email, level, null);
-            s_dalEngineer!.Create(engineer);
+            s_dal!.Engineer.Create(engineer);
         }
     }
     private static void createTasks()//Initializes a list of tasks
@@ -71,7 +73,7 @@ public static class Initialization
             {
                 id = s_rand.Next(1000, 10000);
             }
-            while (s_dalTask!.Read(id) != null);//As long as he didn't find a new ID
+            while (s_dal!.Task.Read(id) != null);//As long as he didn't find a new ID
 
             DateTime createDate = DateTime.Now;
             DateTime startDate = createDate.AddDays(s_rand.Next(0, 11));
@@ -80,7 +82,7 @@ public static class Initialization
             DateTime deadLineDate = complete.AddDays(s_rand.Next(0, 20));
             level = (EngineerExperience)s_rand.Next(0, 3);
             DO.Task newTask =new(id,task.description, task.taskAlias, false, createDate,startDate, ScheduledDate, deadLineDate, complete, null, null,null,level);
-            s_dalTask!.Create(newTask);
+            s_dal!.Task.Create(newTask);
         }
     }
     private static void createDependences()//Initializes a list of Dependences
@@ -100,9 +102,9 @@ public static class Initialization
             {
                 id = s_rand.Next(1, 10);
             }
-            while (s_dalDependence!.Read(id) != null);//Temporary ID until the running number is initialized
+            while (s_dal!.Dependence.Read(id) != null);//Temporary ID until the running number is initialized
             Dependence newDependence = new(id, dependencesNum.dependentOnTask, dependencesNum.dependentTask);
-            s_dalDependence!.Create(newDependence);
+            s_dal!.Dependence.Create(newDependence);
         }
     }
 

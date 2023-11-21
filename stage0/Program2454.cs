@@ -2,7 +2,7 @@
 {
     partial class Program
     {
-        static void Main1(string[] args)
+        static void Main(string[] args)
         {
             Welcome2454();
             Welcome3323();
