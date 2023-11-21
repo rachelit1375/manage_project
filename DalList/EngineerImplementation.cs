@@ -43,6 +43,7 @@ internal class EngineerImplementation : IEngineer
                select item;
     }
 
+    public Engineer? Read(Func<Engineer, bool>? filter = null) => DataSource.Engineers.FirstOrDefault(item => filter!(item));
 
 
     public void Update(Engineer item)

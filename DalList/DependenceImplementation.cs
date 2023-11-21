@@ -40,7 +40,7 @@ internal class DependenceImplementation : IDependence
                select item;
     }
 
-
+    public Dependence? Read(Func<Dependence, bool>? filter = null) => DataSource.Dependences.FirstOrDefault(item => filter!(item));
 
     public void Update(Dependence item)
     {

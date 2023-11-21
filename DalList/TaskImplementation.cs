@@ -48,7 +48,7 @@ internal class TaskImplementation : ITask
                select item;
     }
 
-
+    public Task? Read (Func<Task,bool>? filter=null)=>DataSource.Tasks.FirstOrDefault(item=>filter!(item));
 
 
     public void Update(Task item)
