@@ -47,7 +47,7 @@ internal class Program
 
             case 'c'://read all
                 Console.WriteLine("all the engineers:");
-                List<Engineer> allEngineers = s_dal!.Engineer!.ReadAll();
+                IEnumerable<Engineer> allEngineers = s_dal!.Engineer.ReadAll()!;
                 foreach (var item in allEngineers)
                     Console.WriteLine(item);
                 break;
@@ -147,7 +147,7 @@ internal class Program
 
             case 'c'://read all
                 Console.WriteLine("all the tasks with their customers:");
-                List<DO.Task> allTasks = s_dal.Task!.ReadAll();
+                IEnumerable<DO.Task> allTasks = s_dal.Task!.ReadAll()!;
                 foreach (var item in allTasks)
                     Console.WriteLine(item);
                 break;
@@ -244,7 +244,7 @@ internal class Program
 
             case 'c'://read all
                 Console.WriteLine("all the dependences:");
-                List<DO.Dependence> listReadAllDependences = s_dal.Dependence!.ReadAll();
+               IEnumerable<DO.Dependence> listReadAllDependences = s_dal.Dependence!.ReadAll()!;
                 foreach (var item in listReadAllDependences)
                     Console.WriteLine(item);
                 break;

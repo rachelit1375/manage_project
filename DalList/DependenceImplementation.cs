@@ -25,13 +25,22 @@ internal class DependenceImplementation : IDependence
 
     public Dependence? Read(int id)//Display of dependencies is requested
     {
-        return DataSource.Dependences.Find(x => x.Id == id);
+        return DataSource.Dependences.FirstOrDefault(x => x.Id == id);
     }
 
-    public List<Dependence> ReadAll()//Showing all the dependencies that exist
+    public IEnumerable<Dependence> ReadAll(Func<Dependence, bool>? filter = null)
     {
-        return new List<Dependence>(DataSource.Dependences);
+        if (filter != null)
+        {
+            return from item in DataSource.Dependences
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Dependences
+               select item;
     }
+
+
 
     public void Update(Dependence item)
     {

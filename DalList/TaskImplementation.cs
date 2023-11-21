@@ -3,6 +3,7 @@
 namespace Dal;
 using DalApi;
 using DO;
+using System.Collections;
 using System.Collections.Generic;
 
 internal class TaskImplementation : ITask
@@ -32,13 +33,23 @@ internal class TaskImplementation : ITask
 
     public Task? Read(int id)//Finding the assignment by ID
     {
-        return DataSource.Tasks.Find(x => x.Id == id);
+        return DataSource.Tasks.FirstOrDefault(x => x.Id == id);
     }
 
-    public List<Task> ReadAll()
+    public IEnumerable<Task> ReadAll(Func<Task,bool>? filter=null)
     {
-        return new List<Task>(DataSource.Tasks);
+        if(filter !=null)
+        {
+            return from item in DataSource.Tasks
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Tasks
+               select item;
     }
+
+
+
 
     public void Update(Task item)
     {
