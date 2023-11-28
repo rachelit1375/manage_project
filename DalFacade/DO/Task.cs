@@ -17,5 +17,6 @@ public record Task
     string? Deliverables,///the result of the task
     string? Remarks,///Notes on the task
     int? EngineerId,///The ID of the engineer responsible for the task
-    EngineerExperience? ComplexityLevel//difficulty level
+    EngineerExperience? ComplexityLevel,//difficulty level
+    bool active = true
 );

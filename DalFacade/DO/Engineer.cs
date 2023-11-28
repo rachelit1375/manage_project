@@ -7,5 +7,6 @@ public record Engineer
     string Name,///engineer's name
     string? Email,///engineer's email
     EngineerExperience Level,///The difficulty level of the task he is responsible for
-    double? Cost///How much do you get per hour of work?
+    double? Cost,///How much do you get per hour of work?
+    bool active = true
 );

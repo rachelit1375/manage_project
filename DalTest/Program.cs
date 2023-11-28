@@ -1,8 +1,8 @@
 ﻿using Dal;
 using DalApi;
 using DO;
-using System.Xml.Linq;
 using DalList;
+using System.Xml.Linq;
 namespace DalTest;
 
 internal class Program
@@ -337,5 +337,4 @@ internal class Program
         }
 
     }
-}///initialization לא עובד- לא קיים במאגר
-///הערות
+}
