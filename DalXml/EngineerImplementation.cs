@@ -3,12 +3,17 @@ using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 internal class EngineerImplementation : IEngineer
 {
     public int Create(Engineer item)
     {
-        throw new NotImplementedException();
+        if (Read(item.Id) != null)//If there is such an engineer already
+            throw new DalAlreadyExistsException($"An Engineers With Id= {item.Id} Already Exist");
+        XElement ex=  XMLTools.LoadListFromXMLElement("engineer");
+        ex.Add(item);
+        return item.Id;
     }
 
     public void Delete(int id)
