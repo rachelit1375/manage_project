@@ -39,18 +39,18 @@ internal class DependenceImplementation : IDependence
 
     }
 
-    public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? filter = null)
+    public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? filter)
     {
         List<Dependence> list = XMLTools.LoadListFromXMLSerializer<Dependence>("dependence")!;//
 
-        if (filter != null)
-        {
+        //if (filter != null)
+        //{
             return from item in list
-                   where filter(item)
+                   where filter!(item)
                    select item;
-        }
-        return from item in list
-               select item;
+        //}
+        //return from item in list
+        //       select item;
     }
 
     public void Update(Dependence item)

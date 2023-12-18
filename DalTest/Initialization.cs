@@ -46,7 +46,7 @@ public static class Initialization
                 id = s_rand.Next(200000000, 400000000);
             while (s_dal!.Engineer.Read(id) != null);//As long as he didn't find a new ID
             level = (EngineerExperience)s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());//Engineer level
-            Engineer engineer = new(id, engineerName.name, engineerName.email, level, null);
+            Engineer engineer = new(id, engineerName.name, engineerName.email, level, null,false);
             s_dal!.Engineer.Create(engineer);
         }
     }

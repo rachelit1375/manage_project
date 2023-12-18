@@ -31,18 +31,18 @@ internal class TaskImplementation : ITask
         return XMLTools.LoadListFromXMLSerializer<Task>("task").FirstOrDefault(item => filter!(item)); ;
     }
 
-    public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null)
+    public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter)
     {
         List<Task> list = XMLTools.LoadListFromXMLSerializer<Task>("task")!;
 
-        if (filter != null)
-        {
+        //if (filter != null)
+        //{
             return from item in list
-                   where filter(item)
+                   where filter!(item)
                    select item;
-        }
-        return from item in list
-               select item;
+        //}
+        //return from item in list
+        //       select item;
     }
 
     public void Update(Task item)
