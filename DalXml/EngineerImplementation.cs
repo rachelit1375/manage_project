@@ -27,26 +27,27 @@ internal class EngineerImplementation : IEngineer
 
     }
 
-    public Engineer? Read(Func<Engineer, bool>? filter = null)
-    {//
+    public Engineer? Read(Func<Engineer, bool>? filter)
+    {
         return XMLTools.LoadListFromXMLSerializer<Engineer>("engineer").FirstOrDefault(item => filter!(item)); ;
 
     }
 
-    public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter)
+    public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)
     {
         List<Engineer> list = XMLTools.LoadListFromXMLSerializer<Engineer>("engineer")!;
 
-        //if (filter != null)
-        //{
-        return from item in list
+        if (filter != null)
+        {
+            return from item in list
                where filter!(item)
                select item;
-        //}
-        //return from item in list
-        //       select item;    }
+        }
+        return from item in list
+               select item;
     }
-        public void Update(Engineer item)
+
+    public void Update(Engineer item)
     {
         Engineer? removeEngineer = Read(item.Id);//If the task number is not found
         if (removeEngineer == null)

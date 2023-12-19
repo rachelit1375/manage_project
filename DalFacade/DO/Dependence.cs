@@ -7,4 +7,7 @@ public record Dependence
     int Id,//a run number
     int DependentOnTask,///A previous task  
     int DependentTask///A task that cannot be performed without the DependentOnTask-previous task
-);
+)
+{
+    public Dependence() : this(0, 0, 0) { }
+}

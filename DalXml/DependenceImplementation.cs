@@ -46,9 +46,13 @@ internal class DependenceImplementation : IDependence
         return dependence;
     }
 
-    public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? filter)
+    public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? filter=null)
     {
-        return XMLTools.LoadListFromXMLElement("dependence").Elements("Dependence")!.Select(ex =>
+        if(filter == null)
+            return XMLTools.LoadListFromXMLElement("dependence").Elements("Dependence")!.Select(ex =>
+            new Dependence((int)ex!.Element("Id")!, (int)ex!.Element("DependentOnTask")!, (int)ex!.Element("DependentTask")!));
+        return
+         XMLTools.LoadListFromXMLElement("dependence").Elements("Dependence")!.Select(ex =>
             new Dependence((int)ex!.Element("Id")!, (int)ex!.Element("DependentOnTask")!, (int)ex!.Element("DependentTask")!)).Where(filter!);
     }
 

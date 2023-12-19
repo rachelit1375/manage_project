@@ -1,3 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask>
+	<Task>
+		<Id>1001</Id>
+		<Description>Serve the prepared food from the restaurant kitchen to the diners</Description>
+		<Milestone>false</Milestone>
+		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
+		<Start>2023-12-01T02:19:20.322507+02:00</Start>
+		<ScheduledDate>2023-12-03T08:19:20.3225382+02:00</ScheduledDate>
+		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
+		<Complete>2023-12-07T08:19:20.3225424+02:00</Complete>
+		<EngineerId>329736466</EngineerId>
+	</Task>
+
+	<Task>
+		<Id>1002</Id>
+		<Description>Preparation of dough for all types of bread</Description>
+		<Milestone>false</Milestone>
+		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
+		<Start>2023-12-01T02:19:20.322507+02:00</Start>
+		<ScheduledDate>2023-12-03T08:19:20.3225382+02:00</ScheduledDate>
+		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
+		<Complete>2023-12-07T08:19:20.3225424+02:00</Complete>
+		<EngineerId>325531671</EngineerId>
+	</Task>
+	<Task>
+		<Id>1003</Id>
+		<Description>Chopping the vegetables for all types of salads</Description>
+		<Alias>cutting vegetables</Alias>
+		<Milestone>false</Milestone>
+		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
+		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
+	</Task>
+
+	<Task>
+		<Id>1004</Id>
+		<Description>Washing the dirty dishes that come back from the diners</Description>
+		<Alias>dishwashing</Alias>
+		<Milestone>false</Milestone>
+		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
+		<Start>2023-12-01T02:19:20.322507+02:00</Start>
+		<ScheduledDate>2023-12-03T08:19:20.3225382+02:00</ScheduledDate>
+		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
+		<Complete>2023-12-07T08:19:20.3225424+02:00</Complete>
+		<EngineerId>214490195</EngineerId>
+	</Task>
+
+	<Task>
+		<Id>1005</Id>
+		<Description>Washing the dirty floors</Description>
+		<Milestone>false</Milestone>
+		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
+		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
+	</Task>
+
+	<Task>
+		<Id>1006</Id>
+		<Description>The seasoning of the various dishes in the restaurant</Description>
+		<Alias>seasoning</Alias>
+		<Milestone>false</Milestone>
+		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
+		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
+	</Task>
+
+	<Task>
+		<Id>1007</Id>
+		<Description>to plate the dishes served to the diners</Description>
+		<Milestone>false</Milestone>
+		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
+		<Start>2023-12-01T02:19:20.322507+02:00</Start>
+		<ScheduledDate>2023-12-03T08:19:20.3225382+02:00</ScheduledDate>
+		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
+		<Complete>2023-12-07T08:19:20.3225424+02:00</Complete>
+	</Task>
+
+	<Task>
+		<Id>1008</Id>
+		<Description>Reading the orders from the diners</Description>
+		<Alias>reading</Alias>
+		<Milestone>false</Milestone>
+		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
+		<Start>2023-12-01T02:19:20.322507+02:00</Start>
+		<ScheduledDate>2023-12-03T08:19:20.3225382+02:00</ScheduledDate>
+		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
+		<EngineerId>234769342</EngineerId>
+	</Task>
+
+	<Task>
+		<Id>1009</Id>
+		<Description>Welcoming guests to the restaurant</Description>
+		<Alias>Hospitality</Alias>
+		<Milestone>false</Milestone>
+		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
+		<Start>2023-12-01T02:19:20.322507+02:00</Start>
+		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
+		<EngineerId>324567876</EngineerId>
+	</Task>
+
+	<Task>
+		<Id>1010</Id>
+		<Description>The arrangement of the tables for the diners</Description>
+		<Milestone>false</Milestone>
+		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
+		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
+	</Task>
+
 </ArrayOfTask>

@@ -35,14 +35,14 @@ internal class TaskImplementation : ITask
     {
         List<Task> list = XMLTools.LoadListFromXMLSerializer<Task>("task")!;
 
-        //if (filter != null)
-        //{
+        if (filter != null)
+        {
             return from item in list
                    where filter!(item)
                    select item;
-        //}
-        //return from item in list
-        //       select item;
+        }
+        return from item in list
+               select item;
     }
 
     public void Update(Task item)

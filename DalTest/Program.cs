@@ -4,13 +4,15 @@ using DO;
 using DalList;
 using System.Xml.Linq;
 namespace DalTest;
-
+using DalXml;
 internal class Program
 {
     // private static ITask? s_dalTask = new TaskImplementation();
     // private static IDependence? s_dalDependence = new DependenceImplementation();
     // private static IEngineer? s_dalEngineer = new EngineerImplementation();
-    static readonly IDal s_dal = new DalListClass(); //stage 2
+
+    //static readonly IDal s_dal = new DalListClass(); //stage 2
+    static readonly IDal s_dal = new DalXmlClass(); //stage 3
     public static void InfoOfEngineer(char x)////The function that manages the Engineer's menu
     {
         switch (x)
@@ -21,7 +23,7 @@ internal class Program
                 Console.WriteLine("enter Engineer's name");
                 string? nameAdd = Console.ReadLine();
                 Console.WriteLine("enter Engineer's email");
-                string? emailAdd = (Console.ReadLine());
+                string emailAdd = (Console.ReadLine()!);
                 Console.WriteLine("enter Engineer's level(0-for expert,1-for Junior,2-for Rookie)");
                 EngineerExperience? levelAdd = (EngineerExperience)int.Parse(Console.ReadLine()!);
                 Console.WriteLine("enter Engineer's Cost");
@@ -70,7 +72,7 @@ internal class Program
                     if (nameUpdate == "")//If the user has not added details - will take from the engineer before the update
                         nameUpdate = lastEngineer.Name;
                     Console.WriteLine("enter Engineer's email");
-                    string? emailUpdate = (Console.ReadLine());
+                    string emailUpdate = (Console.ReadLine()!);
                     if (emailUpdate == "")
                         emailUpdate = lastEngineer.Email;
                     Console.WriteLine("enter Engineer's level(0-for expert,1-for Junior,2-for Rookie)");
@@ -99,7 +101,6 @@ internal class Program
                     Console.WriteLine(ex);
                 }
                 break;
-
             default:
                 break;
         }
@@ -123,7 +124,7 @@ internal class Program
                 Console.WriteLine("enter task's date of scheduled");
                 DateTime? scheduledAdd = Convert.ToDateTime(Console.ReadLine());
                 Console.WriteLine("enter task's date of deadline");
-                DateTime? deadlineAdd = Convert.ToDateTime(Console.ReadLine());
+                DateTime deadlineAdd = Convert.ToDateTime(Console.ReadLine()!);
                 Console.WriteLine("enter task's date of complete");
                 DateTime? completeAdd = Convert.ToDateTime(Console.ReadLine());
                 Console.WriteLine("enter task's deliverables");
@@ -175,13 +176,17 @@ internal class Program
                     Console.WriteLine("enter task's milestone");
                     bool milestoneUpdate = bool.Parse(Console.ReadLine()!);//אם לא הוכנס לתא, מה עושים?
                     Console.WriteLine("enter task's date of created");
-                    DateTime? createUpdate = Convert.ToDateTime(Console.ReadLine());                  
+                    DateTime? createUpdate = Convert.ToDateTime(Console.ReadLine());
+                    if (createUpdate == null)
+                        createUpdate = upTask.CreateAt;
                     Console.WriteLine("enter task's date of start");
                     DateTime? startUpdate = Convert.ToDateTime(Console.ReadLine());                    
                     Console.WriteLine("enter task's date of scheduled");
                     DateTime? scheduledUpdate = Convert.ToDateTime(Console.ReadLine());                   
                     Console.WriteLine("enter task's date of deadline");
-                    DateTime? deadlineUpdate = Convert.ToDateTime(Console.ReadLine());                   
+                    DateTime? deadlineUpdate = Convert.ToDateTime(Console.ReadLine());
+                    if (deadlineUpdate == null)
+                        deadlineUpdate = upTask.Deadline;
                     Console.WriteLine("enter task's date of complete");
                     DateTime? completeUpdate = Convert.ToDateTime(Console.ReadLine());                  
                     Console.WriteLine("enter task's deliverables");
@@ -196,9 +201,9 @@ internal class Program
                     int? engineerldUpdate = int.Parse(Console.ReadLine()!);
                     if (engineerldUpdate == null)
                         engineerldUpdate = upTask.EngineerId;
-                    Console.WriteLine("enter task's level(0-for expert,1-for Junior,2-for Rookie)");
+                    Console.WriteLine("enter task's level(0-for Beginner, 1-for AdvancedBeginner, 2-for Competent, 3-Proficient, 4-Expert)");
                     EngineerExperience? levelUpdate = (EngineerExperience)int.Parse(Console.ReadLine()!);                 
-                    DO.Task taskUpdate = new DO.Task(idUpdate, descriptionUpdate, aliasUpdate, milestoneUpdate, createUpdate, startUpdate, scheduledUpdate, deadlineUpdate, completeUpdate, deliverablesUpdate, remarksUpdate, engineerldUpdate, levelUpdate);
+                    DO.Task taskUpdate = new DO.Task(idUpdate, descriptionUpdate, aliasUpdate, milestoneUpdate, (DateTime)createUpdate, startUpdate, scheduledUpdate, (DateTime)deadlineUpdate, completeUpdate, deliverablesUpdate, remarksUpdate, engineerldUpdate, levelUpdate);
                     s_dal.Task!.Update(taskUpdate);
                 }
                 catch (Exception ex)
@@ -287,16 +292,15 @@ internal class Program
     }
      static void Main(string[] args)
     {
-        Initialization.Do(s_dal);
         Console.WriteLine("for engineer press 1");
         Console.WriteLine("for task press 2");
-        Console.WriteLine("for Dependence of tasks press 3");
+        Console.WriteLine("for dependence of tasks press 3");
+        Console.WriteLine("for initialization press 4");
         Console.WriteLine("for exit press 0");
         int choose = int.Parse(Console.ReadLine()!);
         char x;
         while (choose != 0)//As long as 0 was not pressed to exit
         {
-            
             switch (choose)
             {
                 case 1:
@@ -325,6 +329,12 @@ internal class Program
                     Console.WriteLine("for delete a dependence of tasks press e");
                     x = char.Parse(Console.ReadLine()!);
                     InfoOfDependence(x);//The function that manages the Dependence's menu
+                    break;
+                 case 4:
+                    Console.WriteLine("Would you like to create Initial data? (Y/N)"); //stage 3
+                    string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
+                    if (ans == "Y") //stage 3
+                        Initialization.Do(s_dal); //stage 2
                     break;
                 default:
                     break;
