@@ -57,7 +57,7 @@
   </Dependence>
   <Dependence>
     <Id>12</Id>
-    <DependentTask>4</DependentTask>
+    <DependentTask>1004</DependentTask>
     <DependentOnTask>3</DependentOnTask>
   </Dependence>
   <Dependence>
