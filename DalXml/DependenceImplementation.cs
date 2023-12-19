@@ -3,17 +3,23 @@ using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 internal class DependenceImplementation : IDependence
 {
     public int Create(Dependence item)
     {
-        int id = Config.NextTaskId;//Brings the running number
-        Dependence copyDependence = item with { Id = id };//Replaces the id with the new one
-        List<Dependence> list = XMLTools.LoadListFromXMLSerializer<Dependence>("dependence");//טעינה מקובץXML לרשימה ו
-        list.Add(copyDependence);//הוספת הפריט לרשימה
-        XMLTools.SaveListToXMLSerializer<Dependence>(list, "dependence");
-        return id;
+        if (Read(item.Id) != null)//If there is such an engineer already
+            throw new DalAlreadyExistsException($"An Dependences With Id= {item.Id} Already Exist");
+        XElement root = XMLTools.LoadListFromXMLElement("dependence");
+        XElement newEx = new XElement("Dependence",
+            new XElement("Id", item.Id),
+            new XElement("DependentOnTask", item.DependentOnTask),
+            new XElement("DependentTask", item.DependentTask));
+        root.Add(newEx);
+        XMLTools.SaveListToXMLElement(root, "dependence");
+        return item.Id;
     }
 
     public void Delete(int id)
@@ -21,46 +27,34 @@ internal class DependenceImplementation : IDependence
         Dependence? removeDependence = Read(id);
         if (removeDependence == null)
             throw new DalDoesNotExistException($"A Dependence With Number= {id} Does Not Exist");
-
-        List<Dependence> list = XMLTools.LoadListFromXMLSerializer<Dependence>("dependence");//טעינה מקובץXML לרשימה ו
-        list.Remove(removeDependence);//הסרת הפריט לרשימה
-        XMLTools.SaveListToXMLSerializer<Dependence>(list, "dependence");
-
+        XMLTools.LoadListFromXMLElement("dependence").Elements().FirstOrDefault(x=>(int)x.Element("Id")! == id)!.Remove();
     }
 
     public Dependence? Read(int id)
     {
-        return XMLTools.LoadListFromXMLSerializer<Dependence>("dependence").FirstOrDefault(x => x.Id == id);
+        XElement? readEx = XMLTools.LoadListFromXMLElement("dependence").Elements().FirstOrDefault(x => (int)x.Element("Id")! == id);
+        if(readEx == null)
+            return null;
+        Dependence dependence=new Dependence ((int)readEx.Element("Id")!, (int)readEx.Element("DependentOnTask")!, (int)readEx.Element("DependentTask")!);
+        return dependence;
     }
 
     public Dependence? Read(Func<Dependence, bool> filter)
     {
-        return XMLTools.LoadListFromXMLSerializer<Dependence>("dependence").FirstOrDefault(item => filter!(item));
-
+        Dependence? dependence = XMLTools.LoadListFromXMLElement("dependence").Elements("Dependence")!.Select(ex =>
+            new Dependence((int)ex!.Element("Id")!, (int)ex!.Element("DependentOnTask")!, (int)ex!.Element("DependentTask")!)).FirstOrDefault(filter!); 
+        return dependence;
     }
 
     public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? filter)
     {
-        List<Dependence> list = XMLTools.LoadListFromXMLSerializer<Dependence>("dependence")!;//
-
-        //if (filter != null)
-        //{
-            return from item in list
-                   where filter!(item)
-                   select item;
-        //}
-        //return from item in list
-        //       select item;
+        return XMLTools.LoadListFromXMLElement("dependence").Elements("Dependence")!.Select(ex =>
+            new Dependence((int)ex!.Element("Id")!, (int)ex!.Element("DependentOnTask")!, (int)ex!.Element("DependentTask")!)).Where(filter!);
     }
 
     public void Update(Dependence item)
     {
-        Dependence? dependenceTask = Read(item.Id);
-        if (dependenceTask == null) //If not find an dependence to update
-            throw new DalDoesNotExistException($"A Dependence With Number= {item.Id} Does Not Exist");
-        List<Dependence> list = XMLTools.LoadListFromXMLSerializer<Dependence>("dependence")!;//
-        list.Remove(dependenceTask);
-        list.Add(item);
-        XMLTools.SaveListToXMLSerializer<Dependence>(list, "dependence");
+        Delete(item.Id);
+        Create(item);
     }
 }

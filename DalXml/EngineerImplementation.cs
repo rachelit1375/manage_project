@@ -4,25 +4,15 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
-using System.Xml.Linq;
 
 internal class EngineerImplementation : IEngineer
 {
     public int Create(Engineer item)
     {
-        if (Read(item.Id) != null)//If there is such an engineer already
-            throw new DalAlreadyExistsException($"An Engineers With Id= {item.Id} Already Exist");
-        XElement root=  XMLTools.LoadListFromXMLElement("engineer");
-        XElement newEx = new XElement("Engineer",
-            new XElement("Id", item.Id),
-            new XElement("Name", item.Name),
-            new XElement("Email", item.Email),
-            new XElement("Level", item.Level),
-            new XElement("Cost", item.Cost),
-            new XElement("Active", item.Active)
-            );
-        root.Add(newEx);
-        XMLTools.SaveListToXMLElement(root, "engineer");
+        Engineer copyEngineer = item;//Replaces the id with the new one
+        List<Engineer> list = XMLTools.LoadListFromXMLSerializer<Engineer>("engineer");//טעינה מקובץXML לרשימה ו
+        list.Add(copyEngineer);//הוספת הפריט לרשימה
+        XMLTools.SaveListToXMLSerializer<Engineer>(list, "engineer");
         return item.Id;
     }
 
@@ -33,30 +23,37 @@ internal class EngineerImplementation : IEngineer
 
     public Engineer? Read(int id)
     {
-        XElement? ex =  XMLTools.LoadListFromXMLElement("engineer").Elements("Engineer").FirstOrDefault(x => (int)x.Element("Id")! == id);
-        if (ex == null)
-            return null;
-        int level = (int)ex!.Element("Level")!;
-        Engineer engineer = new Engineer((int)ex!.Element("Id")!, (string)ex!.Element("Name")!, (string)ex!.Element("Email")!, (DO.EngineerExperience)level, (double)ex!.Element("Cost")!, (bool)ex!.Element("Active")!);
-        return engineer;//Returns the engineer
+        return XMLTools.LoadListFromXMLSerializer<Engineer>("engineer").FirstOrDefault(x => x.Id == id);
+
     }
 
     public Engineer? Read(Func<Engineer, bool>? filter = null)
     {//
-        XElement? ex = XMLTools.LoadListFromXMLElement("engineer").Elements("Engineer").Select(ex =>
-            new Engineer((int)ex!.Element("Id")!, (string)ex!.Element("Name")!, (string)ex!.Element("Email")!, (DO.EngineerExperience)ex!.Element("Level")!, (double)ex!.Element("Cost")!, (bool)ex!.Element("Active")!)).FirstOrDefault(filter);
-        int level = (int)ex!.Element("Level")!;
-        Engineer engineer = new Engineer((int)ex!.Element("Id")!, (string)ex!.Element("Name")!, (string)ex!.Element("Email")!, (DO.EngineerExperience)level, (double)ex!.Element("Cost")!, (bool)ex!.Element("Active")!);
-        return engineer;//Returns the engineer
+        return XMLTools.LoadListFromXMLSerializer<Engineer>("engineer").FirstOrDefault(item => filter!(item)); ;
+
     }
 
     public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter)
     {
-        return null;
-    }
+        List<Engineer> list = XMLTools.LoadListFromXMLSerializer<Engineer>("engineer")!;
 
-    public void Update(Engineer item)
+        //if (filter != null)
+        //{
+        return from item in list
+               where filter!(item)
+               select item;
+        //}
+        //return from item in list
+        //       select item;    }
+    }
+        public void Update(Engineer item)
     {
-        
+        Engineer? removeEngineer = Read(item.Id);//If the task number is not found
+        if (removeEngineer == null)
+            throw new DalDoesNotExistException($"A Task With Number= {item.Id} Does Not Exist");
+        List<Engineer> list = XMLTools.LoadListFromXMLSerializer<Engineer>("engineer")!;
+        list.Remove(removeEngineer);
+        list.Add(item);
+        XMLTools.SaveListToXMLSerializer<Engineer>(list, "engineer");
     }
 }
