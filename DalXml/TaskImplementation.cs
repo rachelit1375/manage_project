@@ -8,7 +8,7 @@ internal class TaskImplementation : ITask
 {
     public int Create(Task item)
     {
-        int id = Config.NextTaskId;//Brings the running number
+        int id = Config.NextTaskId;//Brings the running  number
         Task copyTask = item with { Id = id };//Replaces the id with the new one
         List<Task> list = XMLTools.LoadListFromXMLSerializer<Task>("task");//טעינה מקובץXML לרשימה ו
         list.Add(copyTask);//הוספת הפריט לרשימה
