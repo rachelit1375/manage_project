@@ -3,6 +3,7 @@ using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 internal class TaskImplementation : ITask
 {
@@ -55,5 +56,16 @@ internal class TaskImplementation : ITask
         list.Remove(removeTask);
         list.Add(item);
         XMLTools.SaveListToXMLSerializer<Task>(list, "task");
+    }
+
+    public void Reset()
+    {
+        List<Task> list = XMLTools.LoadListFromXMLSerializer<Task>("task")!;
+        list.Clear();
+        XMLTools.SaveListToXMLSerializer<Task>(list, "task");
+
+        XElement xConfig = XMLTools.LoadListFromXMLElement("data-config");
+        xConfig.Element("NextTaskId")!.SetValue(1);
+        XMLTools.SaveListToXMLElement(xConfig, "data-config");
     }
 }

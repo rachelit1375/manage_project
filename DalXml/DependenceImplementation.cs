@@ -14,7 +14,7 @@ internal class DependenceImplementation : IDependence
             throw new DalAlreadyExistsException($"An Dependences With Id= {item.Id} Already Exist");
         XElement root = XMLTools.LoadListFromXMLElement("dependence");
         XElement newEx = new XElement("Dependence",
-            new XElement("Id", item.Id),
+            new XElement("Id", Config.NextDependenceId),
             new XElement("DependentOnTask", item.DependentOnTask),
             new XElement("DependentTask", item.DependentTask));
         root.Add(newEx);
@@ -35,7 +35,7 @@ internal class DependenceImplementation : IDependence
         XElement? readEx = XMLTools.LoadListFromXMLElement("dependence").Elements().FirstOrDefault(x => (int)x.Element("Id")! == id);
         if(readEx == null)
             return null;
-        Dependence dependence=new Dependence ((int)readEx.Element("Id")!, (int)readEx.Element("DependentOnTask")!, (int)readEx.Element("DependentTask")!);
+        Dependence dependence = new Dependence ((int)readEx.Element("Id")!, (int)readEx.Element("DependentOnTask")!, (int)readEx.Element("DependentTask")!);
         return dependence;
     }
 
@@ -60,5 +60,16 @@ internal class DependenceImplementation : IDependence
     {
         Delete(item.Id);
         Create(item);
+    }
+
+    public void Reset()
+    {
+        XElement root = XMLTools.LoadListFromXMLElement("dependence");
+        root.Elements().Remove();
+        XMLTools.SaveListToXMLElement(root, "dependence");
+
+        XElement xConfig = XMLTools.LoadListFromXMLElement("data-config");
+        xConfig.Element("NextDependenceId")!.SetValue(1);
+        XMLTools.SaveListToXMLElement(xConfig, "data-config");
     }
 }

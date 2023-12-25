@@ -21,6 +21,9 @@ public static class Initialization
       //  s_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");
        // s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
         s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        s_dal.Task.Reset();
+        s_dal.Engineer.Reset();
+        s_dal.Dependence.Reset();
         createEngineers();
         createTasks();
         createDependences();
@@ -89,10 +92,10 @@ public static class Initialization
     {
         (int dependentOnTask, int dependentTask)[] dependencesNums =
           {//array
-           (1000,1001),
-           (1002,1003),
-           (1003,1004),
-           (1004, 1005)
+           (1,2),
+           (2,3),
+           (3,4),
+           (4, 5)
         };
         int id;
 
@@ -108,5 +111,4 @@ public static class Initialization
         }
     }
 
-   
 }

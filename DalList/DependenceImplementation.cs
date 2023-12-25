@@ -54,4 +54,9 @@ internal class DependenceImplementation : IDependence
         DataSource.Dependences.Remove(dependenceTask);
         DataSource.Dependences.Add(item);
     }
+
+    public void Reset()
+    {
+        DataSource.Dependences.Clear();
+    }
 }

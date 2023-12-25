@@ -1,107 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfTask>
-	<Task>
-		<Id>1001</Id>
-		<Description>Serve the prepared food from the restaurant kitchen to the diners</Description>
-		<Milestone>false</Milestone>
-		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
-		<Start>2023-12-01T02:19:20.322507+02:00</Start>
-		<ScheduledDate>2023-12-03T08:19:20.3225382+02:00</ScheduledDate>
-		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
-		<Complete>2023-12-07T08:19:20.3225424+02:00</Complete>
-		<EngineerId>329736466</EngineerId>
-	</Task>
-
-	<Task>
-		<Id>1002</Id>
-		<Description>Preparation of dough for all types of bread</Description>
-		<Milestone>false</Milestone>
-		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
-		<Start>2023-12-01T02:19:20.322507+02:00</Start>
-		<ScheduledDate>2023-12-03T08:19:20.3225382+02:00</ScheduledDate>
-		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
-		<Complete>2023-12-07T08:19:20.3225424+02:00</Complete>
-		<EngineerId>325531671</EngineerId>
-	</Task>
-	<Task>
-		<Id>1003</Id>
-		<Description>Chopping the vegetables for all types of salads</Description>
-		<Alias>cutting vegetables</Alias>
-		<Milestone>false</Milestone>
-		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
-		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
-	</Task>
-
-	<Task>
-		<Id>1004</Id>
-		<Description>Washing the dirty dishes that come back from the diners</Description>
-		<Alias>dishwashing</Alias>
-		<Milestone>false</Milestone>
-		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
-		<Start>2023-12-01T02:19:20.322507+02:00</Start>
-		<ScheduledDate>2023-12-03T08:19:20.3225382+02:00</ScheduledDate>
-		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
-		<Complete>2023-12-07T08:19:20.3225424+02:00</Complete>
-		<EngineerId>214490195</EngineerId>
-	</Task>
-
-	<Task>
-		<Id>1005</Id>
-		<Description>Washing the dirty floors</Description>
-		<Milestone>false</Milestone>
-		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
-		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
-	</Task>
-
-	<Task>
-		<Id>1006</Id>
-		<Description>The seasoning of the various dishes in the restaurant</Description>
-		<Alias>seasoning</Alias>
-		<Milestone>false</Milestone>
-		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
-		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
-	</Task>
-
-	<Task>
-		<Id>1007</Id>
-		<Description>to plate the dishes served to the diners</Description>
-		<Milestone>false</Milestone>
-		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
-		<Start>2023-12-01T02:19:20.322507+02:00</Start>
-		<ScheduledDate>2023-12-03T08:19:20.3225382+02:00</ScheduledDate>
-		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
-		<Complete>2023-12-07T08:19:20.3225424+02:00</Complete>
-	</Task>
-
-	<Task>
-		<Id>1008</Id>
-		<Description>Reading the orders from the diners</Description>
-		<Alias>reading</Alias>
-		<Milestone>false</Milestone>
-		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
-		<Start>2023-12-01T02:19:20.322507+02:00</Start>
-		<ScheduledDate>2023-12-03T08:19:20.3225382+02:00</ScheduledDate>
-		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
-		<EngineerId>234769342</EngineerId>
-	</Task>
-
-	<Task>
-		<Id>1009</Id>
-		<Description>Welcoming guests to the restaurant</Description>
-		<Alias>Hospitality</Alias>
-		<Milestone>false</Milestone>
-		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
-		<Start>2023-12-01T02:19:20.322507+02:00</Start>
-		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
-		<EngineerId>324567876</EngineerId>
-	</Task>
-
-	<Task>
-		<Id>1010</Id>
-		<Description>The arrangement of the tables for the diners</Description>
-		<Milestone>false</Milestone>
-		<CreateAt>2023-11-30T06:19:20.3141859+02:00</CreateAt>
-		<Deadline>2023-12-06T02:19:20.3225409+02:00</Deadline>
-	</Task>
-
+<ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Task>
+    <Id>1</Id>
+    <Description>manage the budget</Description>
+    <Alias>Budget</Alias>
+    <MileStone>false</MileStone>
+    <CreateAt>2023-12-25T17:49:44.8646116+02:00</CreateAt>
+    <Start>2023-12-27T17:49:44.8646116+02:00</Start>
+    <ScheduledDate>2024-01-25T17:49:44.8646116+02:00</ScheduledDate>
+    <Deadline>2024-02-08T17:49:44.8646116+02:00</Deadline>
+    <Complete>2024-01-31T17:49:44.8646116+02:00</Complete>
+    <EngineerId xsi:nil="true" />
+    <ComplexityLevel>Beginner</ComplexityLevel>
+  </Task>
+  <Task>
+    <Id>2</Id>
+    <Description>obtain building permits</Description>
+    <Alias>Permits</Alias>
+    <MileStone>false</MileStone>
+    <CreateAt>2023-12-25T17:49:44.8693542+02:00</CreateAt>
+    <Start>2024-01-04T17:49:44.8693542+02:00</Start>
+    <ScheduledDate>2024-02-06T17:49:44.8693542+02:00</ScheduledDate>
+    <Deadline>2024-02-15T17:49:44.8693542+02:00</Deadline>
+    <Complete>2024-02-15T17:49:44.8693542+02:00</Complete>
+    <EngineerId xsi:nil="true" />
+    <ComplexityLevel>Competent</ComplexityLevel>
+  </Task>
+  <Task>
+    <Id>3</Id>
+    <Description>Supervise the construction</Description>
+    <Alias>Supervision</Alias>
+    <MileStone>false</MileStone>
+    <CreateAt>2023-12-25T17:49:44.8711027+02:00</CreateAt>
+    <Start>2024-01-01T17:49:44.8711027+02:00</Start>
+    <ScheduledDate>2024-01-22T17:49:44.8711027+02:00</ScheduledDate>
+    <Deadline>2024-02-14T17:49:44.8711027+02:00</Deadline>
+    <Complete>2024-02-01T17:49:44.8711027+02:00</Complete>
+    <EngineerId xsi:nil="true" />
+    <ComplexityLevel>Proficient</ComplexityLevel>
+  </Task>
+  <Task>
+    <Id>4</Id>
+    <Description>floor the apartment</Description>
+    <Alias>Flooring</Alias>
+    <MileStone>false</MileStone>
+    <CreateAt>2023-12-25T17:49:44.8731244+02:00</CreateAt>
+    <Start>2024-01-01T17:49:44.8731244+02:00</Start>
+    <ScheduledDate>2024-01-09T17:49:44.8731244+02:00</ScheduledDate>
+    <Deadline>2024-01-27T17:49:44.8731244+02:00</Deadline>
+    <Complete>2024-01-13T17:49:44.8731244+02:00</Complete>
+    <EngineerId xsi:nil="true" />
+    <ComplexityLevel>Expert</ComplexityLevel>
+  </Task>
+  <Task>
+    <Id>5</Id>
+    <Description>plan the form of construction</Description>
+    <Alias>Planning</Alias>
+    <MileStone>false</MileStone>
+    <CreateAt>2023-12-25T17:49:44.8750857+02:00</CreateAt>
+    <Start>2024-01-01T17:49:44.8750857+02:00</Start>
+    <ScheduledDate>2024-01-15T17:49:44.8750857+02:00</ScheduledDate>
+    <Deadline>2024-01-24T17:49:44.8750857+02:00</Deadline>
+    <Complete>2024-01-15T17:49:44.8750857+02:00</Complete>
+    <EngineerId xsi:nil="true" />
+    <ComplexityLevel>Beginner</ComplexityLevel>
+  </Task>
+  <Task>
+    <Id>6</Id>
+    <Description>design the kitchen</Description>
+    <Alias>Kitchen</Alias>
+    <MileStone>false</MileStone>
+    <CreateAt>2023-12-25T17:49:44.8770316+02:00</CreateAt>
+    <Start>2023-12-31T17:49:44.8770316+02:00</Start>
+    <ScheduledDate>2024-01-27T17:49:44.8770316+02:00</ScheduledDate>
+    <Deadline>2024-01-20T17:49:44.8770316+02:00</Deadline>
+    <Complete>2024-01-06T17:49:44.8770316+02:00</Complete>
+    <EngineerId xsi:nil="true" />
+    <ComplexityLevel>AdvancedBeginner</ComplexityLevel>
+  </Task>
+  <Task>
+    <Id>7</Id>
+    <Description>design the bedroom</Description>
+    <Alias>Bedroom</Alias>
+    <MileStone>false</MileStone>
+    <CreateAt>2023-12-25T17:49:44.8790845+02:00</CreateAt>
+    <Start>2024-01-04T17:49:44.8790845+02:00</Start>
+    <ScheduledDate>2024-01-30T17:49:44.8790845+02:00</ScheduledDate>
+    <Deadline>2024-02-12T17:49:44.8790845+02:00</Deadline>
+    <Complete>2024-02-10T17:49:44.8790845+02:00</Complete>
+    <EngineerId xsi:nil="true" />
+    <ComplexityLevel>Competent</ComplexityLevel>
+  </Task>
+  <Task>
+    <Id>8</Id>
+    <Description>design the living room</Description>
+    <Alias>Living-room</Alias>
+    <MileStone>false</MileStone>
+    <CreateAt>2023-12-25T17:49:44.8811021+02:00</CreateAt>
+    <Start>2023-12-28T17:49:44.8811021+02:00</Start>
+    <ScheduledDate>2024-02-16T17:49:44.8811021+02:00</ScheduledDate>
+    <Deadline>2024-02-18T17:49:44.8811021+02:00</Deadline>
+    <Complete>2024-02-12T17:49:44.8811021+02:00</Complete>
+    <EngineerId xsi:nil="true" />
+    <ComplexityLevel>Proficient</ComplexityLevel>
+  </Task>
 </ArrayOfTask>

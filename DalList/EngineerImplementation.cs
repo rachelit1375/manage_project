@@ -48,7 +48,7 @@ internal class EngineerImplementation : IEngineer
         //return from item in DataSource.Engineers
         //       select item;
     }
-
+    
     public void Update(Engineer item)
     {
         Engineer? removeEngineer = Read(item.Id);
@@ -57,5 +57,10 @@ internal class EngineerImplementation : IEngineer
 
         DataSource.Engineers.Remove(removeEngineer);
         DataSource.Engineers.Add(item);
+    }
+
+    public void Reset()
+    {
+        DataSource.Engineers.Clear();
     }
 }

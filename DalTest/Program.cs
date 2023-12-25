@@ -28,7 +28,7 @@ internal class Program
                 EngineerExperience? levelAdd = (EngineerExperience)int.Parse(Console.ReadLine()!);
                 Console.WriteLine("enter Engineer's Cost");
                 double? costAdd = double.Parse(Console.ReadLine()!);
-                Engineer engineerAdd = new Engineer(idAdd, nameAdd!, emailAdd, (EngineerExperience)levelAdd, costAdd);
+                Engineer engineerAdd = new Engineer(idAdd, nameAdd!, emailAdd, (EngineerExperience)levelAdd, costAdd, true);
 
                 try
                 {
@@ -80,7 +80,7 @@ internal class Program
                     Console.WriteLine("enter Engineer's Cost");
                     double? costUpdate = double.Parse(Console.ReadLine()!);
                     costUpdate ??= lastEngineer.Cost;
-                    Engineer engineerUpdate = new Engineer(idUpdate, nameUpdate!, emailUpdate, (EngineerExperience)levelUpdate, costUpdate);
+                    Engineer engineerUpdate = new Engineer(idUpdate, nameUpdate!, emailUpdate, (EngineerExperience)levelUpdate, costUpdate, true);
                     s_dal.Engineer?.Update(engineerUpdate);//Updates the engineer
                 }
                 catch (Exception ex)
@@ -342,6 +342,7 @@ internal class Program
             Console.WriteLine("for engineer press 1");
             Console.WriteLine("for task press 2");
             Console.WriteLine("for Dependence of tasks press 3");
+            Console.WriteLine("for initialization press 4");
             Console.WriteLine("for exit press 0");
             choose = int.Parse(Console.ReadLine()!);
         }

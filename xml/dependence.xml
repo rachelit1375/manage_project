@@ -57,7 +57,7 @@
   </Dependence>
   <Dependence>
     <Id>12</Id>
-    <DependentTask>1004</DependentTask>
+    <DependentTask>4</DependentTask>
     <DependentOnTask>3</DependentOnTask>
   </Dependence>
   <Dependence>
@@ -201,13 +201,13 @@
     <DependentOnTask>4</DependentOnTask>
   </Dependence>
   <Dependence>
-    <Id>2</Id>
-    <DependentTask>1</DependentTask>
-    <DependentOnTask>2</DependentOnTask>
+    <Id>41</Id>
+    <DependentOnTask>3</DependentOnTask>
+    <DependentTask>30</DependentTask>
   </Dependence>
   <Dependence>
-    <Id>121</Id>
-    <DependentOnTask>1001</DependentOnTask>
-    <DependentTask>1002</DependentTask>
+    <Id>42</Id>
+    <DependentOnTask>3</DependentOnTask>
+    <DependentTask>40</DependentTask>
   </Dependence>
 </ArrayOfDependence>

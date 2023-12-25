@@ -63,4 +63,9 @@ internal class TaskImplementation : ITask
         DataSource.Tasks.Remove(removeTask);
         DataSource.Tasks.Add(item);
     }
+
+    public void Reset()
+    {
+        DataSource.Tasks.Clear();
+    }
 }

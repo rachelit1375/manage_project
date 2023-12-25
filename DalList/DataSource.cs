@@ -6,7 +6,7 @@ namespace Dal;
 {
     internal static class Config
     {
-        internal const int startTaskId = 1000;//Initialize the running number
+        internal const int startTaskId = 1;//Initialize the running number
         private static int nextTaskId = startTaskId;
         internal static int NextTaskId { get => nextTaskId++; }
        

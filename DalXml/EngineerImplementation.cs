@@ -29,7 +29,7 @@ internal class EngineerImplementation : IEngineer
 
     public Engineer? Read(Func<Engineer, bool>? filter)
     {
-        return XMLTools.LoadListFromXMLSerializer<Engineer>("engineer").FirstOrDefault(item => filter!(item)); ;
+        return XMLTools.LoadListFromXMLSerializer<Engineer>("engineer").FirstOrDefault(item => filter!(item)); 
 
     }
 
@@ -55,6 +55,13 @@ internal class EngineerImplementation : IEngineer
         List<Engineer> list = XMLTools.LoadListFromXMLSerializer<Engineer>("engineer")!;
         list.Remove(removeEngineer);
         list.Add(item);
+        XMLTools.SaveListToXMLSerializer<Engineer>(list, "engineer");
+    }
+
+    public void Reset()
+    {
+        List<Engineer> list = XMLTools.LoadListFromXMLSerializer<Engineer>("engineer")!;
+        list.Clear();
         XMLTools.SaveListToXMLSerializer<Engineer>(list, "engineer");
     }
 }
