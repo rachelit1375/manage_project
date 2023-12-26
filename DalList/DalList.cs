@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace Dal;
 
-sealed public class DalListClass : IDal
+sealed internal class DalList : IDal
 {
+    public static IDal Instance { get; } = new DalList();
+    private DalList() { }
     public ITask Task => new TaskImplementation();
     public IDependence Dependence => new DependenceImplementation();
     public IEngineer Engineer => new EngineerImplementation();

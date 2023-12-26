@@ -15,21 +15,25 @@ public static class Initialization
     //private static IEngineer? s_dalEngineer = null;
     private static IDal? s_dal; 
     private static readonly Random s_rand = new();
-    public static void Do(IDal dal) 
+    //public static void Do(IDal dal) //stage 2
+    public static void Do()//stage 4
     {
-       // s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
-      //  s_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");
-       // s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
-        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        // s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
+        //  s_dalDependence = dalDependence ?? throw new NullReferenceException("DAL can not be null!");
+        // s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
+
+        //s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        s_dal = DalApi.Factory.Get; //stage 4      
         s_dal.Task.Reset();
         s_dal.Engineer.Reset();
         s_dal.Dependence.Reset();
-        createEngineers();
-        createTasks();
-        createDependences();
+        CreateEngineers();
+        CreateTasks();
+        CreateDependences();
     }
-    private static void createEngineers()//Initializes a list of engineers
+    private static void CreateEngineers()//Initializes a list of engineers
     {
+
         (string name, string email)[] engineerNames =
         {//An array of engineers
            ("Racheli Toledano", "racheli@gmail.com"),
@@ -53,7 +57,7 @@ public static class Initialization
             s_dal!.Engineer.Create(engineer);
         }
     }
-    private static void createTasks()//Initializes a list of tasks
+    private static void CreateTasks()//Initializes a list of tasks
     {
         (string taskAlias, string description)[] tasks =
           {//array
@@ -88,7 +92,7 @@ public static class Initialization
             s_dal!.Task.Create(newTask);
         }
     }
-    private static void createDependences()//Initializes a list of Dependences
+    private static void CreateDependences()//Initializes a list of Dependences
     {
         (int dependentOnTask, int dependentTask)[] dependencesNums =
           {//array

@@ -39,14 +39,14 @@ internal class EngineerImplementation : IEngineer
 
     public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter)
     {
-        //if (filter != null)
-        //{
+        if (filter != null)
+        {
             return from item in DataSource.Engineers
                    where filter!(item)
                    select item;
-        //}
-        //return from item in DataSource.Engineers
-        //       select item;
+    }
+        return from item in DataSource.Engineers
+               select item;
     }
     
     public void Update(Engineer item)

@@ -11,8 +11,9 @@ internal class Program
     // private static IDependence? s_dalDependence = new DependenceImplementation();
     // private static IEngineer? s_dalEngineer = new EngineerImplementation();
 
-    //static readonly IDal s_dal = new DalListClass(); //stage 2
-    static readonly IDal s_dal = new DalXmlClass(); //stage 3
+    //static readonly IDal s_dal = new Dal.DalList(); //stage 2
+    //static readonly IDal s_dal = new Dal.DalXml(); //stage 3
+    static readonly IDal s_dal = Factory.Get;//stage 4
     public static void InfoOfEngineer(char x)////The function that manages the Engineer's menu
     {
         switch (x)
@@ -75,7 +76,7 @@ internal class Program
                     string emailUpdate = (Console.ReadLine()!);
                     if (emailUpdate == "")
                         emailUpdate = lastEngineer.Email;
-                    Console.WriteLine("enter Engineer's level(0-for expert,1-for Junior,2-for Rookie)");
+                    Console.WriteLine("enter Engineer's level(0-for Beginner,1-for AdvancedBeginner,2-for Competent,3-for Proficient,4-for Expert)");
                     EngineerExperience levelUpdate = (EngineerExperience)int.Parse(Console.ReadLine()!);
                     Console.WriteLine("enter Engineer's Cost");
                     double? costUpdate = double.Parse(Console.ReadLine()!);
@@ -133,7 +134,7 @@ internal class Program
                 string? remarksAdd = Console.ReadLine();
                 Console.WriteLine("enter task's engineerld");
                 int engineerldAdd = int.Parse(Console.ReadLine()!);
-                Console.WriteLine("enter task's level(0-for expert,1-for Junior,2-for Rookie)");
+                Console.WriteLine("enter task's level(0-for Beginner, 1-for AdvancedBeginner, 2-for Competent, 3-Proficient, 4-Expert)");
                 EngineerExperience? levelAdd = (EngineerExperience)int.Parse(Console.ReadLine()!);
 
                 DO.Task task = new DO.Task(111, descriptionAdd, aliasAdd, milestoneAdd, createAdd, startAdd, scheduledAdd, deadlineAdd, completeAdd, deliverablesAdd, remarksAdd, engineerldAdd, levelAdd);//Create a new task
@@ -334,7 +335,9 @@ internal class Program
                     Console.WriteLine("Would you like to create Initial data? (Y/N)"); //stage 3
                     string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
                     if (ans == "Y") //stage 3
-                        Initialization.Do(s_dal); //stage 2
+                    { //Initialization.Do(s_dal); //stage 2
+                        Initialization.Do();//stage 4
+                    }
                     break;
                 default:
                     break;
