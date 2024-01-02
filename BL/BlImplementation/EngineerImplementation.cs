@@ -1,5 +1,7 @@
 ﻿
 using BlApi;
+using BO;
+
 
 namespace BlImplementation;
 
@@ -9,43 +11,81 @@ internal class EngineerImplementation : IEngineer
 
     public int Create(BO.Engineer item)
     {
-        if (item.Id <= 0)
-            throw new ArgumentException();//
-        if (item.Name?.Length <= 0)
-            throw new ArgumentException();//
-        if (item.Cost < 0)//<=
-            throw new ArgumentException();//
-        if (!item.Email!.Contains("@"))
-            throw new ArgumentException();//
-        DO.Engineer doEngineer = new DO.Engineer(item.Id, item.Name!, item.Email, (DO.EngineerExperience)item.Level!, item.Cost, item.Active);
+        //verification Checking
+        Tools.CheckId(item.Id);
+        Tools.CheckName(item.Name);
+        Tools.CheckCost(item.Cost);
+        Tools.CheckEmail(item.Email);
+        
+        DO.Engineer doEngineer = new DO.Engineer(item.Id, item.Name!, item.Email!, (DO.EngineerExperience)item.Level!, item.Cost, item.Active);//Creating a new DAL object
         try
         {
-            int idEngineer = _dal.Engineer.Create(doEngineer);
+            int idEngineer = _dal.Engineer.Create(doEngineer);//Saving the engineer
             return idEngineer;
         }
         catch (DO.DalAlreadyExistsException ex)
         {
-            throw new BO.BlAlreadyExistsException($"Student with ID={item.Id} already exists", ex);
+            throw new BO.BlAlreadyExistsException($"Engineer with ID={item.Id} already exists", ex);
         }
     }
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+    //    try
+    //    {
+    //        _dal.Engineer.Delete(id);
+    //    }
+    //    catch (DO.DalDoesNotExistException exception)
+    //    {
+    //        throw new BO.BlDoesNotExistException($"An object of type Engineer with ID {id} does not exist", exception);
+    //    }
     }
 
     public BO.Engineer? Read(int id)
     {
-        throw new NotImplementedException();
+        DO.Engineer? doEngineer = _dal.Engineer.Read(id);
+        if (doEngineer == null)//Checking whether there is such an engineer
+            throw new BO.BlDoesNotExistException($"Engineer with ID={id} doesn't exists");
+        var tasks = _dal.Task.ReadAll();//Accepts all tasks
+        var foundTask = (from task in tasks
+                       where task.EngineerId == id && task.Start is not null && task.Complete is null
+                       select new { task.Id, task.Alias }).FirstOrDefault();//Goes through all tasks and looks for the current engineer's current task
+        BO.TaskInEngineer? taskInEngineer = null;
+        if (foundTask != null) //If found -creates a TaskInEngineer object
+            taskInEngineer = new BO.TaskInEngineer() { Id = foundTask.Id, Alias = foundTask.Alias };
+        return new BO.Engineer()//  return a new obj of BO.Engineer
+        {
+            Id = id,
+            Name = doEngineer.Name,
+            Email = doEngineer.Email,
+            Level = (BO.EngineerExperience?)doEngineer.Level,
+            Cost = doEngineer.Cost,
+            Task = taskInEngineer
+        };
     }
 
     public IEnumerable<BO.Engineer> ReadAll(Func<DO.Engineer, bool>? filter = null)
     {
-        throw new NotImplementedException();
+        var doAllEngineer = _dal.Engineer.ReadAll(filter);
+        return from doEngineer in doAllEngineer
+               select Read(doEngineer.Id);
+
     }
 
     public void Update(BO.Engineer item)
-    {
-        throw new NotImplementedException();
+    { //verification Checking
+        Tools.CheckId(item.Id);
+        Tools.CheckName(item.Name);
+        Tools.CheckCost(item.Cost);
+        Tools.CheckEmail(item.Email);
+        DO.Engineer doEngineer= new DO.Engineer(item.Id, item.Name!, item.Email!, (DO.EngineerExperience?)item.Level, item.Cost, item.Active);
+        try
+        {
+            _dal.Engineer.Update(doEngineer);
+        }
+        catch (Exception ex)
+        {
+            throw new BO.BlDoesNotExistException($"Engineer with ID={item.Id} doesn't exists", ex);
+        }
     }
 }

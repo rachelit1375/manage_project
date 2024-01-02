@@ -1,7 +1,7 @@
 ﻿using Dal;
 using DalApi;
 using DO;
-using DalList;
+//using DalList;
 using System.Xml.Linq;
 namespace DalTest;
 using DalXml;
@@ -120,6 +120,8 @@ internal class Program
                 bool milestoneAdd = bool.Parse(Console.ReadLine()!);
                 Console.WriteLine("enter task's date of created");
                 DateTime createAdd = Convert.ToDateTime(Console.ReadLine());
+                Console.WriteLine("Enter the amount of time required to complete the task");
+                TimeSpan requiredEffortTime= TimeSpan.Parse(Console.ReadLine()!);
                 Console.WriteLine("enter task's date of start");
                 DateTime? startAdd = Convert.ToDateTime(Console.ReadLine());
                 Console.WriteLine("enter task's date of scheduled");
@@ -137,7 +139,7 @@ internal class Program
                 Console.WriteLine("enter task's level(0-for Beginner, 1-for AdvancedBeginner, 2-for Competent, 3-Proficient, 4-Expert)");
                 EngineerExperience? levelAdd = (EngineerExperience)int.Parse(Console.ReadLine()!);
 
-                DO.Task task = new DO.Task(111, descriptionAdd, aliasAdd, milestoneAdd, createAdd, startAdd, scheduledAdd, deadlineAdd, completeAdd, deliverablesAdd, remarksAdd, engineerldAdd, levelAdd);//Create a new task
+                DO.Task task = new DO.Task(111, descriptionAdd, aliasAdd, milestoneAdd, createAdd, startAdd, scheduledAdd, deadlineAdd, completeAdd, deliverablesAdd, remarksAdd, engineerldAdd, levelAdd, requiredEffortTime);//Create a new task
                 s_dal.Task!.Create(task);
                 break;
 
@@ -181,7 +183,11 @@ internal class Program
                     if (createUpdate == null)
                         createUpdate = upTask.CreateAt;
                     Console.WriteLine("enter task's date of start");
-                    DateTime? startUpdate = Convert.ToDateTime(Console.ReadLine());                    
+                    DateTime? startUpdate = Convert.ToDateTime(Console.ReadLine());
+                    Console.WriteLine("enter task's date of deadline");
+                    TimeSpan? requiredEffortTimeUp = TimeSpan.Parse(Console.ReadLine()!);// to check the !!!
+                    if (requiredEffortTimeUp == null)
+                        requiredEffortTimeUp = upTask.RequiredEffortTime;
                     Console.WriteLine("enter task's date of scheduled");
                     DateTime? scheduledUpdate = Convert.ToDateTime(Console.ReadLine());                   
                     Console.WriteLine("enter task's date of deadline");
@@ -204,7 +210,7 @@ internal class Program
                         engineerldUpdate = upTask.EngineerId;
                     Console.WriteLine("enter task's level(0-for Beginner, 1-for AdvancedBeginner, 2-for Competent, 3-Proficient, 4-Expert)");
                     EngineerExperience? levelUpdate = (EngineerExperience)int.Parse(Console.ReadLine()!);                 
-                    DO.Task taskUpdate = new DO.Task(idUpdate, descriptionUpdate, aliasUpdate, milestoneUpdate, (DateTime)createUpdate, startUpdate, scheduledUpdate, (DateTime)deadlineUpdate, completeUpdate, deliverablesUpdate, remarksUpdate, engineerldUpdate, levelUpdate);
+                    DO.Task taskUpdate = new DO.Task(idUpdate, descriptionUpdate, aliasUpdate, milestoneUpdate, (DateTime)createUpdate, startUpdate, scheduledUpdate, (DateTime)deadlineUpdate, completeUpdate, deliverablesUpdate, remarksUpdate, engineerldUpdate, levelUpdate, requiredEffortTimeUp);
                     s_dal.Task!.Update(taskUpdate);
                 }
                 catch (Exception ex)

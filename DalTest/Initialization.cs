@@ -2,18 +2,16 @@
 namespace DalTest;
 using DalApi;
 using DO;
-using System.Reflection.Emit;
-using System.Threading.Tasks;
 
 /// <summary>
 /// 
 /// </summary>
 public static class Initialization
 {
-   // private static ITask? s_dalTask = null;
-   // private static IDependence? s_dalDependence = null;
+    // private static ITask? s_dalTask = null;
+    // private static IDependence? s_dalDependence = null;
     //private static IEngineer? s_dalEngineer = null;
-    private static IDal? s_dal; 
+    private static IDal? s_dal;
     private static readonly Random s_rand = new();
     //public static void Do(IDal dal) //stage 2
     public static void Do()//stage 4
@@ -53,7 +51,7 @@ public static class Initialization
                 id = s_rand.Next(200000000, 400000000);
             while (s_dal!.Engineer.Read(id) != null);//As long as he didn't find a new ID
             level = (EngineerExperience)s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());//Engineer level
-            Engineer engineer = new(id, engineerName.name, engineerName.email, level, null,false);
+            Engineer engineer = new(id, engineerName.name, engineerName.email, level, null, false);
             s_dal!.Engineer.Create(engineer);
         }
     }
@@ -88,7 +86,7 @@ public static class Initialization
             DateTime complete = createDate.AddDays(s_rand.Next(11, 61));
             DateTime deadLineDate = complete.AddDays(s_rand.Next(0, 20));
             level = (EngineerExperience)s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());
-            DO.Task newTask =new(id,task.description, task.taskAlias, false, createDate,startDate, ScheduledDate, deadLineDate, complete, null, null,null,level);
+            DO.Task newTask = new(id, task.description, task.taskAlias, false, createDate, startDate, ScheduledDate, deadLineDate, complete, null, null, null, level,null);
             s_dal!.Task.Create(newTask);
         }
     }

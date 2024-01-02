@@ -8,7 +8,11 @@ public enum EngineerExperience//Expertise levels of an engineer
     Proficient,
     Expert
 }
-public enum Status
+public enum Status//Different task statuses
 {
-
+    Unscheduled, 
+    Scheduled, 
+    OnTrack, 
+    InJeopardy,
+    Complete
 }

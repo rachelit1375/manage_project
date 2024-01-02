@@ -16,8 +16,9 @@ public record Task
     string? Deliverables,///the result of the task
     string? Remarks,///Notes on the task
     int? EngineerId,///The ID of the engineer responsible for the task
-    EngineerExperience? ComplexityLevel//difficulty level
+    EngineerExperience? ComplexityLevel,//difficulty level
+    TimeSpan? RequiredEffortTime
 )
 {
-    public Task() : this(0,null,null,false,DateTime.Now,null,null, DateTime.Now, null,null,null,null,null) { }
+    public Task() : this(0, null, null, false, DateTime.Now, null, null, DateTime.Now, null, null, null, null, null, null) { }
 }
