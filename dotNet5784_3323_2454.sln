@@ -27,9 +27,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{3B7566D6-00D
 		xml\task.xml = xml\task.xml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{5DC27D26-B0C4-403C-A022-90C03CDA04FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{5DC27D26-B0C4-403C-A022-90C03CDA04FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlTest", "BlTest\BlTest.csproj", "{FBDF35DF-BA59-4C9A-B370-B67CAAAF75BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlTest", "BlTest\BlTest.csproj", "{FBDF35DF-BA59-4C9A-B370-B67CAAAF75BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PL", "PL\PL.csproj", "{A896CAFF-185F-47AD-A07F-9A21C7488DA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{FBDF35DF-BA59-4C9A-B370-B67CAAAF75BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBDF35DF-BA59-4C9A-B370-B67CAAAF75BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBDF35DF-BA59-4C9A-B370-B67CAAAF75BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A896CAFF-185F-47AD-A07F-9A21C7488DA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A896CAFF-185F-47AD-A07F-9A21C7488DA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A896CAFF-185F-47AD-A07F-9A21C7488DA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A896CAFF-185F-47AD-A07F-9A21C7488DA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

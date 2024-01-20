@@ -113,9 +113,15 @@ internal class TaskImplementation : ITask
         };
     }
 
-    public IEnumerable<BO.Task> ReadAll(Func<DO.Task, bool>? filter = null)
+    public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool>? filter = null)
     {
-        var doAllTask = _dal.Task.ReadAll(filter);
+        var doAllTask = _dal.Task.ReadAll();
+        if(filter != null)
+        {
+            return from doTask in doAllTask
+                   where filter(Read(doTask.Id)!)// !  & twice Read...
+                   select Read(doTask.Id);
+        }
         return from doTask in doAllTask
                select Read(doTask.Id);
     }

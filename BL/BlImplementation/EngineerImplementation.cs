@@ -64,9 +64,15 @@ internal class EngineerImplementation : IEngineer
         };
     }
 
-    public IEnumerable<BO.Engineer> ReadAll(Func<DO.Engineer, bool>? filter = null)
+    public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool>? filter = null)
     {
-        var doAllEngineer = _dal.Engineer.ReadAll(filter);
+        var doAllEngineer = _dal.Engineer.ReadAll();
+        if(filter != null)
+        {
+            return from doEngineer in doAllEngineer
+                   where filter(Read(doEngineer.Id)!) //! & twice Read...
+                   select Read(doEngineer.Id);
+        }
         return from doEngineer in doAllEngineer
                select Read(doEngineer.Id);
 

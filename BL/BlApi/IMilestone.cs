@@ -5,6 +5,7 @@ namespace BlApi;
 /// </summary>
 public interface IMilestone
 {
+    public int Create(BO.Milestone item);
     public BO.Milestone? Read(int id);
     public void Update(int id);
 }
