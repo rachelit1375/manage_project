@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.Engineer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,21 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void BtnEngineer_Click(object sender, RoutedEventArgs e)
+        {
+            new EngineerListWindow().Show();
+        }
+
+        private void BtnInitialize_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to perform the reset?", "Initialiize", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                DalTest.Initialization.Do();
+            }
         }
     }
 }
