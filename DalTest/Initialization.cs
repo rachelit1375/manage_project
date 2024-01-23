@@ -69,7 +69,7 @@ public static class Initialization
            ("Living-room", "design the living room")
         };
 
-        EngineerExperience level;
+        var allEngineers = s_dal?.Engineer.ReadAll().ToList();
         int id;
 
         foreach (var task in tasks)
@@ -85,8 +85,9 @@ public static class Initialization
             DateTime ScheduledDate = createDate.AddDays(s_rand.Next(11, 61));
             DateTime complete = createDate.AddDays(s_rand.Next(11, 61));
             DateTime deadLineDate = complete.AddDays(s_rand.Next(0, 20));
-            level = (EngineerExperience)s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());
-            DO.Task newTask = new(id, task.description, task.taskAlias, false, createDate, startDate, ScheduledDate, deadLineDate, complete, null, null, null, level,null);
+            EngineerExperience level = (EngineerExperience)s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());
+            int? engineerId = allEngineers == null? null : allEngineers[s_rand.Next(0, allEngineers.Count())]!.Id;
+            DO.Task newTask = new(id, task.description, task.taskAlias, false, createDate, startDate, ScheduledDate, deadLineDate, complete, null, null, engineerId, level,null);
             s_dal!.Task.Create(newTask);
         }
     }

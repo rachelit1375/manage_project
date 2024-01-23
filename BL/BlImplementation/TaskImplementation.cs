@@ -44,12 +44,13 @@ internal class TaskImplementation : ITask
     {
         var allDependences = _dal.Dependence.ReadAll();
         MilestoneInTask? milestoneTask = (from dependence in allDependences
-                              where dependence.DependentOnTask == id && _dal.Task.Read(dependence.DependentTask)!.MileStone
-                              select new BO.MilestoneInTask()
-                              {
-                                  Id = dependence.DependentTask,
-                                  Alias = _dal.Task.Read(dependence.DependentTask)!.Alias
-                              }).FirstOrDefault();
+                                          let taskDepend = _dal.Task.Read(dependence.DependentTask)
+                                          where dependence.DependentOnTask == id && taskDepend!.MileStone
+                                          select new BO.MilestoneInTask()
+                                          {
+                                              Id = dependence.DependentTask,
+                                              Alias = taskDepend!.Alias
+                                          }).FirstOrDefault();
         return milestoneTask;
     }
 
@@ -58,12 +59,13 @@ internal class TaskImplementation : ITask
         var dependences = _dal.Dependence.ReadAll();//Accepts all dependences
         var dependentTasks = (from dependence in dependences
                               where dependence.DependentTask == id
+                              let taskDependOn = _dal.Task.Read(dependence.DependentOnTask)
                               select new BO.TaskInList()
                               {
                                   Id = dependence.Id,
-                                  Description = _dal.Task.Read(dependence.DependentOnTask)?.Description,
-                                  Alias = _dal.Task.Read(dependence.DependentOnTask)?.Alias,
-                                  Status = GetStatus(_dal.Task.Read(dependence.DependentOnTask)!)
+                                  Description = taskDependOn?.Description,
+                                  Alias = taskDependOn?.Alias,
+                                  Status = GetStatus(taskDependOn)
                               });
         return (List<TaskInList>)dependentTasks;
     }
@@ -116,14 +118,34 @@ internal class TaskImplementation : ITask
     public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool>? filter = null)
     {
         var doAllTask = _dal.Task.ReadAll();
-        if(filter != null)
-        {
-            return from doTask in doAllTask
-                   where filter(Read(doTask.Id)!)// !  & twice Read...
-                   select Read(doTask.Id);
-        }
-        return from doTask in doAllTask
-               select Read(doTask.Id);
+        var a = from doTask in doAllTask
+                let taskEngineer = _dal.Engineer.ReadAll(engineer => doTask.EngineerId == engineer.Id).FirstOrDefault()
+                select new BO.Task()//return a new obj of BO.Task
+                {
+                    Id = doTask.Id,
+                    Description = doTask?.Description,
+                    Alias = doTask?.Alias,
+                    MileStone = GetMilestone(doTask.Id),
+                    StatusTask = GetStatus(doTask!),
+                    DependenceList = GetDependentTasks(doTask.Id),
+                    CreateAt = doTask!.CreateAt,
+                    Start = doTask.Start,
+                    ScheduledDate = doTask?.ScheduledDate,
+                    Deadline = doTask!.Deadline,
+                    Complete = doTask.Complete,
+                    Deliverables = doTask?.Deliverables,
+                    Remarks = doTask?.Remarks,
+                    Engineer = taskEngineer == null? null : new EngineerInTask()
+                    {
+                        Id = taskEngineer.Id,
+                        Name = taskEngineer?.Name
+                    },
+                    ComplexityLevel = (EngineerExperience?)doTask!.ComplexityLevel,
+                };
+
+        if (filter == null)
+            return a;
+        return a.Where(filter);
     }
 
     public void Update(BO.Task item)
