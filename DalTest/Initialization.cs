@@ -50,7 +50,7 @@ public static class Initialization
             do
                 id = s_rand.Next(200000000, 400000000);
             while (s_dal!.Engineer.Read(id) != null);//As long as he didn't find a new ID
-            level = (EngineerExperience)s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());//Engineer level
+            level = (EngineerExperience)s_rand.Next(1, Enum.GetNames<EngineerExperience>().Count());//Engineer level
             Engineer engineer = new(id, engineerName.name, engineerName.email, level, null, false);
             s_dal!.Engineer.Create(engineer);
         }
@@ -85,7 +85,7 @@ public static class Initialization
             DateTime ScheduledDate = createDate.AddDays(s_rand.Next(11, 61));
             DateTime complete = createDate.AddDays(s_rand.Next(11, 61));
             DateTime deadLineDate = complete.AddDays(s_rand.Next(0, 20));
-            EngineerExperience level = (EngineerExperience)s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());
+            EngineerExperience level = (EngineerExperience)s_rand.Next(1, Enum.GetNames<EngineerExperience>().Count());
             int? engineerId = allEngineers == null? null : allEngineers[s_rand.Next(0, allEngineers.Count())]!.Id;
             DO.Task newTask = new(id, task.description, task.taskAlias, false, createDate, startDate, ScheduledDate, deadLineDate, complete, null, null, engineerId, level,null);
             s_dal!.Task.Create(newTask);

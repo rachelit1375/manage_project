@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="EngineerWindow" Height="640" Width="800">
-    <Grid>
+        Title="EngineerWindow" Height="640" Width="800"
+        DataContext="{Binding Engineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="name" HorizontalAlignment="Left" Margin="570,166,0,0" VerticalAlignment="Top" Height="44" Width="111"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="email" HorizontalAlignment="Left" Margin="570,268,0,0" VerticalAlignment="Top" Height="44" Width="111"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="level" HorizontalAlignment="Left" Margin="570,342,0,0" VerticalAlignment="Top" Height="44" Width="111"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="cost" HorizontalAlignment="Left" Margin="570,395,0,0" VerticalAlignment="Top" Height="44" Width="111"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="tasks" HorizontalAlignment="Left" Margin="570,444,0,0" VerticalAlignment="Top" Height="44" Width="111"/>
+        <Button Grid.Row="5" Content="" HorizontalAlignment="Center" Height="35" Width="110" Margin="0,487,0,102" Click="Button_Click"/>
+        <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="400,170,0,0" TextWrapping="Wrap" Text="{Binding Engineer.Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="400,272,0,0" TextWrapping="Wrap" Text="{Binding Engineer.Email, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="400,395,0,0" TextWrapping="Wrap" Text="{Binding Engineer.Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="400,344,0,0" ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionKey}}" SelectedValue="{Binding level, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>
