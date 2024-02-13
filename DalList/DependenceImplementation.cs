@@ -28,7 +28,7 @@ internal class DependenceImplementation : IDependence
         return DataSource.Dependences.FirstOrDefault(x => x.Id == id);
     }
 
-    public Dependence? Read(Func<Dependence, bool>? filter)
+    public Dependence? Read(Func<Dependence, bool>? filter)//Searches for the dependency according to the filter and returns the first one or the default
     {
         return DataSource.Dependences.FirstOrDefault(item => filter!(item));
     }

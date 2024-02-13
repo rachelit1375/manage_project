@@ -32,7 +32,7 @@ internal class EngineerImplementation : IEngineer
       return DataSource.Engineers.FirstOrDefault(x=> x.Id == id);//Returns the engineer
     }
 
-    public Engineer? Read(Func<Engineer, bool>? filter)
+    public Engineer? Read(Func<Engineer, bool>? filter)//Searches for the Engineer according to the filter and returns the first one or the defaultSearches for the dependency according to the filter and returns the first one or the default
     {
         return DataSource.Engineers.FirstOrDefault(item => filter!(item));
     }
@@ -43,8 +43,8 @@ internal class EngineerImplementation : IEngineer
         {
             return from item in DataSource.Engineers
                    where filter!(item)
-                   select item;
-    }
+                   select item;//Returns all engineers that are filtered
+        }
         return from item in DataSource.Engineers
                select item;
     }

@@ -23,18 +23,18 @@ internal class TaskImplementation : ITask
     }
 
     public Task? Read(int id)
-    {
+    {//Returns the requested task
         return XMLTools.LoadListFromXMLSerializer<Task>("task").FirstOrDefault(x => x.Id == id);
     }
 
     public Task? Read(Func<Task, bool> filter)
-    {
+    {//Returns the requested task after filtering
         return XMLTools.LoadListFromXMLSerializer<Task>("task").FirstOrDefault(item => filter!(item)); ;
     }
 
     public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter)
     {
-        List<Task> list = XMLTools.LoadListFromXMLSerializer<Task>("task")!;
+        List<Task> list = XMLTools.LoadListFromXMLSerializer<Task>("task")!;// The task list
 
         if (filter != null)
         {
@@ -49,23 +49,23 @@ internal class TaskImplementation : ITask
     public void Update(Task item)
     {
 
-        Task? removeTask = Read(item.Id);//If the task number is not found
-        if (removeTask == null)
+        Task? removeTask = Read(item.Id);
+        if (removeTask == null)//If the task number is not found
             throw new DalDoesNotExistException($"A Task With Number= {item.Id} Does Not Exist");
-        List<Task> list = XMLTools.LoadListFromXMLSerializer<Task>("task")!;
-        list.Remove(removeTask);
-        list.Add(item);
-        XMLTools.SaveListToXMLSerializer<Task>(list, "task");
+        List<Task> list = XMLTools.LoadListFromXMLSerializer<Task>("task")!;// The task list
+        list.Remove(removeTask);//Deletes the task before the update
+        list.Add(item);//Adds the updated task
+        XMLTools.SaveListToXMLSerializer<Task>(list, "task");//Saves the updated list
     }
 
     public void Reset()
     {
-        List<Task> list = XMLTools.LoadListFromXMLSerializer<Task>("task")!;
-        list.Clear();
-        XMLTools.SaveListToXMLSerializer<Task>(list, "task");
+        List<Task> list = XMLTools.LoadListFromXMLSerializer<Task>("task")!;//The task list
+        list.Clear();//Deletes everything
+        XMLTools.SaveListToXMLSerializer<Task>(list, "task");//Saves the Clear list
 
         XElement xConfig = XMLTools.LoadListFromXMLElement("data-config");
-        xConfig.Element("NextTaskId")!.SetValue(1);
+        xConfig.Element("NextTaskId")!.SetValue(1);//Initializes the running number
         XMLTools.SaveListToXMLElement(xConfig, "data-config");
     }
 }

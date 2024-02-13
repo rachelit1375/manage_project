@@ -37,7 +37,7 @@ internal class TaskImplementation : ITask
         return DataSource.Tasks.FirstOrDefault(x => x.Id == id);
     }
 
-    public Task? Read(Func<Task, bool>? filter)
+    public Task? Read(Func<Task, bool>? filter)//Searches for the Task according to the filter and returns the first one or the default
     {
         return DataSource.Tasks.FirstOrDefault(item => filter!(item));
     }
@@ -46,7 +46,7 @@ internal class TaskImplementation : ITask
     {
         //if(filter !=null)
         //{
-            return from item in DataSource.Tasks
+            return from item in DataSource.Tasks//Returns all Tasks that are filtered
                    where filter!(item)
                    select item;
         //}
@@ -57,11 +57,11 @@ internal class TaskImplementation : ITask
     public void Update(Task item)
     {
         Task? removeTask = Read(item.Id);//If the task number is not found
-        if (removeTask == null)
+        if (removeTask == null)//
             throw new DalDoesNotExistException($"A Task With Number= {item.Id} Does Not Exist");
 
-        DataSource.Tasks.Remove(removeTask);
-        DataSource.Tasks.Add(item);
+        DataSource.Tasks.Remove(removeTask);//Removes the task before updating
+        DataSource.Tasks.Add(item);//Adds the updated task
     }
 
     public void Reset()

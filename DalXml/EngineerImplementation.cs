@@ -23,19 +23,19 @@ internal class EngineerImplementation : IEngineer
 
     public Engineer? Read(int id)
     {
-        return XMLTools.LoadListFromXMLSerializer<Engineer>("engineer").FirstOrDefault(x => x.Id == id);
+        return XMLTools.LoadListFromXMLSerializer<Engineer>("engineer").FirstOrDefault(x => x.Id == id);//Returns the requested engineer
 
     }
 
     public Engineer? Read(Func<Engineer, bool>? filter)
     {
-        return XMLTools.LoadListFromXMLSerializer<Engineer>("engineer").FirstOrDefault(item => filter!(item)); 
+        return XMLTools.LoadListFromXMLSerializer<Engineer>("engineer").FirstOrDefault(item => filter!(item)); //Returns the requested engineer if the filter conditions are met
 
     }
 
     public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)
     {
-        List<Engineer> list = XMLTools.LoadListFromXMLSerializer<Engineer>("engineer")!;
+        List<Engineer> list = XMLTools.LoadListFromXMLSerializer<Engineer>("engineer")!;//List of engineers
 
         if (filter != null)
         {
@@ -49,12 +49,12 @@ internal class EngineerImplementation : IEngineer
 
     public void Update(Engineer item)
     {
-        Engineer? removeEngineer = Read(item.Id);//If the task number is not found
-        if (removeEngineer == null)
+        Engineer? removeEngineer = Read(item.Id);
+        if (removeEngineer == null)//If the task number is not found
             throw new DalDoesNotExistException($"A Task With Number= {item.Id} Does Not Exist");
         List<Engineer> list = XMLTools.LoadListFromXMLSerializer<Engineer>("engineer")!;
-        list.Remove(removeEngineer);
-        list.Add(item);
+        list.Remove(removeEngineer);//Deleted from the list
+        list.Add(item);//adds to the list
         XMLTools.SaveListToXMLSerializer<Engineer>(list, "engineer");
     }
 

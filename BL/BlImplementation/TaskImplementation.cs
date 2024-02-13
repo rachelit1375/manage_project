@@ -50,7 +50,7 @@ internal class TaskImplementation : ITask
                                           {
                                               Id = dependence.DependentTask,
                                               Alias = taskDepend!.Alias
-                                          }).FirstOrDefault();
+                                          }).FirstOrDefault();//Goes through all dependencies and checks if this is a milestone task of this task, if so - creates a milestone
         return milestoneTask;
     }
 
@@ -66,10 +66,10 @@ internal class TaskImplementation : ITask
                                   Description = taskDependOn?.Description,
                                   Alias = taskDependOn?.Alias,
                                   Status = GetStatus(taskDependOn)
-                              });
+                              });//Goes through the dependencies and checks if this is a task that depends on it, if so builds a taskinlist
         return (List<TaskInList>)dependentTasks;
     }
-    public Status GetStatus(DO.Task doTask)
+    public Status GetStatus(DO.Task doTask)//This operation calculates the status of the task
     {
         if (doTask.Complete != null && doTask.Complete <= DateTime.Now)
             return Status.Complete;

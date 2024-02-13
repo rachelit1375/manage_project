@@ -48,7 +48,7 @@ public static class Initialization
         foreach (var engineerName in engineerNames)
         {
             do
-                id = s_rand.Next(200000000, 400000000);
+                id = s_rand.Next(200000000, 900000000);
             while (s_dal!.Engineer.Read(id) != null);//As long as he didn't find a new ID
             level = (EngineerExperience)s_rand.Next(1, Enum.GetNames<EngineerExperience>().Count());//Engineer level
             Engineer engineer = new(id, engineerName.name, engineerName.email, level, null, false);
@@ -79,14 +79,14 @@ public static class Initialization
                 id = s_rand.Next(1000, 10000);
             }
             while (s_dal!.Task.Read(id) != null);//As long as he didn't find a new ID
-
+            //Resets the times according to our logic
             DateTime createDate = DateTime.Now;
             DateTime startDate = createDate.AddDays(s_rand.Next(0, 11));
             DateTime ScheduledDate = createDate.AddDays(s_rand.Next(11, 61));
             DateTime complete = createDate.AddDays(s_rand.Next(11, 61));
             DateTime deadLineDate = complete.AddDays(s_rand.Next(0, 20));
-            EngineerExperience level = (EngineerExperience)s_rand.Next(1, Enum.GetNames<EngineerExperience>().Count());
-            int? engineerId = allEngineers == null? null : allEngineers[s_rand.Next(0, allEngineers.Count())]!.Id;
+            EngineerExperience level = (EngineerExperience)s_rand.Next(1, Enum.GetNames<EngineerExperience>().Count());//Randomly resets the engineer level
+            int? engineerId = allEngineers == null? null : allEngineers[s_rand.Next(0, allEngineers.Count())]!.Id;//Randomly fetches an engineer ID number
             DO.Task newTask = new(id, task.description, task.taskAlias, false, createDate, startDate, ScheduledDate, deadLineDate, complete, null, null, engineerId, level,null);
             s_dal!.Task.Create(newTask);
         }

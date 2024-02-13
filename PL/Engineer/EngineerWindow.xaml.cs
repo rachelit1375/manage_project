@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace PL.Engineer
 {
@@ -7,19 +8,18 @@ namespace PL.Engineer
     /// </summary>
     public partial class EngineerWindow : Window
     {
-        private static readonly BlApi.IBl s_bl = BlApi.Factory.Get();//יש כבר את אותה שורה בEngineerListWindow
-        public BO.EngineerExperience level { get; set; } = BO.EngineerExperience.None;//יש כבר את אותה שורה בEngineerListWindow
+        private static readonly BlApi.IBl s_bl = BlApi.Factory.Get();// for the contact with BL
 
-        public EngineerWindow(int id = 0)
+        public EngineerWindow(int idEngineer = 0)
         {
             InitializeComponent();
-            try
+            if (idEngineer == 0)
             {
-                Engineer = id == 0 ? new BO.Engineer() : s_bl.Engineer.Read(id)!;
+                Engineer = new BO.Engineer();
             }
-            catch (System.Exception ex)
+            else
             {
-                MessageBox.Show(ex.ToString());//
+                Engineer = s_bl.Engineer.Read(idEngineer)!;// if we are in update state find the engineer  
             }
         }
 
@@ -30,11 +30,37 @@ namespace PL.Engineer
         }
 
         public static readonly DependencyProperty EngineerProperty =
-                    DependencyProperty.Register("Engineer", typeof(BO.Engineer), typeof(EngineerListWindow), new PropertyMetadata(null));
+                    DependencyProperty.Register("Engineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnAddUpdate_Click(object sender, RoutedEventArgs e)
         {
+            if ((sender as Button)!.Content.ToString() == "Add")//Checks the name of the button and accordingly saves the data
+            {
+                try
+                {
+                    int? id = s_bl.Engineer.Create(Engineer!);//call the func from the BL- create the engineer
+                    MessageBox.Show($"Engineer {id} added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
+                }
+                catch (BO.BlAlreadyExistsException ex)
+                {
+                    MessageBox.Show(ex.Message, "Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
+            }
+            else
+            {
+                try
+                {
+                    s_bl.Engineer.Update(Engineer);//call the func from the BL- update the engineer
+                    MessageBox.Show($"Engineer {Engineer.Id} updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
+                }
+                catch (BO.BlDoesNotExistException ex)
+                {
+                    MessageBox.Show(ex.Message, "Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
 
+            }
         }
     }
 }

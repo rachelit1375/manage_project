@@ -28,7 +28,7 @@ namespace PL
 
         private void BtnEngineer_Click(object sender, RoutedEventArgs e)
         {
-            new EngineerListWindow().Show();
+            new EngineerListWindow().ShowDialog();
         }
 
         private void BtnInitialize_Click(object sender, RoutedEventArgs e)

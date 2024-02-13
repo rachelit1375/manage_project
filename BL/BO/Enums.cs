@@ -11,6 +11,7 @@ public enum EngineerExperience//Expertise levels of an engineer
 }
 public enum Status//Different task statuses
 {
+    None,
     Unscheduled, 
     Scheduled, 
     OnTrack, 
