@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <Id>2</Id>
-    <Description>obtain building permits</Description>
-    <Alias>Permits</Alias>
-    <MileStone>false</MileStone>
-    <CreateAt>2024-02-14T18:57:13.7473496+02:00</CreateAt>
-    <Start>2024-02-15T18:57:13.7473496+02:00</Start>
-    <ScheduledDate>2024-03-23T18:57:13.7473496+02:00</ScheduledDate>
-    <Deadline>2024-04-21T18:57:13.7473496+03:00</Deadline>
-    <Complete>2024-04-04T18:57:13.7473496+03:00</Complete>
-    <EngineerId>685466100</EngineerId>
-    <ComplexityLevel>Proficient</ComplexityLevel>
-    <RequiredEffortTime xsi:nil="true" />
-  </Task>
-  <Task>
     <Id>3</Id>
     <Description>Supervise the construction</Description>
     <Alias>Supervision</Alias>
@@ -157,5 +143,35 @@
     <EngineerId>681400629</EngineerId>
     <ComplexityLevel>AdvancedBeginner</ComplexityLevel>
     <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>12</Id>
+    <Description>s</Description>
+    <Alias>d</Alias>
+    <MileStone>false</MileStone>
+    <CreateAt>2024-02-14T00:00:00+02:00</CreateAt>
+    <Start xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <Deadline>2024-02-14T00:00:00</Deadline>
+    <Complete xsi:nil="true" />
+    <Deliverables />
+    <Remarks />
+    <EngineerId>685466100</EngineerId>
+    <ComplexityLevel>AdvancedBeginner</ComplexityLevel>
+    <RequiredEffortTime xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>2</Id>
+    <Description>obtain building permits</Description>
+    <Alias>Permitss</Alias>
+    <MileStone>false</MileStone>
+    <CreateAt>2024-02-14T00:00:00</CreateAt>
+    <Start>2024-02-15T00:00:00</Start>
+    <ScheduledDate>2024-03-23T00:00:00</ScheduledDate>
+    <Deadline>2024-04-21T00:00:00</Deadline>
+    <Complete>2024-04-04T00:00:00</Complete>
+    <EngineerId>685466100</EngineerId>
+    <ComplexityLevel>Proficient</ComplexityLevel>
+    <RequiredEffortTime>PT0S</RequiredEffortTime>
   </Task>
 </ArrayOfTask>

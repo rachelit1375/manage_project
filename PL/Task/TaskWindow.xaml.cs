@@ -1,9 +1,12 @@
 ﻿using BlApi;
 using BO;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace PL.Task
 {
@@ -18,8 +21,6 @@ namespace PL.Task
 
         public TaskWindow(int idTask = 0)//the id has a default value
         {
-            InitializeComponent();
-
             if (idTask == 0)
             {
                 Task = new BO.Task()
@@ -29,7 +30,7 @@ namespace PL.Task
                     Alias = "",
                     MileStone = null,
                     StatusTask = null,
-                    DependenceList = null,
+                    DependenceList = new List<TaskInList>(),
                     CreateAt = DateTime.Now,
                     Start = null,
                     ScheduledDate = null,
@@ -48,7 +49,12 @@ namespace PL.Task
             else
             {
                 Task = s_bl.Task.Read(idTask)!;// if we are in update state find the Task  
+                if (Task.DependenceList != null)
+                {
+                    Dependence =  Task.DependenceList;
+                }              
             }
+            InitializeComponent();
         }
 
         public BO.Task Task//dependency feature 
@@ -62,12 +68,6 @@ namespace PL.Task
 
         private void BtnAddUpdate_Click(object sender, RoutedEventArgs e)
         {
-            //if ( != null)
-            //{
-            //  BO.EngineerInTask engineerInTask = new BO.EngineerInTask() {Id= 0, Name = "ggg" };
-            //    Task.Engineer = new BO.EngineerInTask() { engineerInTask.Id, engineerInTask.Name };
-            //}
-            
             if ((sender as Button)!.Content.ToString() == "Add")//Checks the name of the button and accordingly saves the data
             {
                 try
@@ -95,6 +95,24 @@ namespace PL.Task
                 }
 
             }
+        }
+
+        public List<BO.TaskInList>? Dependence//dependency feature 
+        {
+            get { return (List<BO.TaskInList>)GetValue(DependenceProperty); }
+            set { SetValue(DependenceProperty, value); }
+        }
+
+        public static readonly DependencyProperty DependenceProperty =
+                  DependencyProperty.Register("Dependence", typeof(List<BO.TaskInList>), typeof(TaskWindow), new PropertyMetadata(null));
+
+        private void Cmb_DependenceChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //int selectedIndex = (sender as ComboBox)!.SelectedIndex;
+            //var selectedValue = (sender as ComboBox)!.SelectedValue;
+
+            //Task.DependenceList[selectedIndex].Alias = selectedValue.ToString();
+            //Task.DependenceList?.Add();
         }
     }
 }

@@ -29,12 +29,12 @@ internal class EngineerCollection : IEnumerable// Bring all of the engineer's id
     public IEnumerator GetEnumerator() => e_enums.GetEnumerator();
 }
 
-internal class DependenceListCollection : IEnumerable// Bring all of the engineer's id as enum
+internal class DependenceListCollection : IEnumerable// Bring all of the task's names as enum
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-    static readonly IEnumerable<string> aliasEngineers = (from task in s_bl.Task.ReadAll()// create IEnumerable of the engineers id                     
+    static readonly IEnumerable<string> aliasTasks = (from task in s_bl.Task.ReadAll()// create IEnumerable of the engineers id                     
                                                     select task.Alias);
-    static readonly IEnumerable<string> e_enums = aliasEngineers;// 
+    static readonly IEnumerable<string> e_enums = aliasTasks;// 
 
     public IEnumerator GetEnumerator() => e_enums.GetEnumerator();
 }
