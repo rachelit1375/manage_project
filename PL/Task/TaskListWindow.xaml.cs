@@ -1,24 +1,19 @@
 ﻿using PL.Task;
+using PL.Task;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace PL.Task
 {
-    /// <summary>
-    /// Interaction logic for TaskListWindow.xaml
-    /// </summary>
     public partial class TaskListWindow : Window
     {
         private static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
@@ -42,19 +37,22 @@ namespace PL.Task
             TaskList = new(s_bl.Task.ReadAll()!);
         }
 
-        private void Cmb_StatusChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void Lv_UpdateClick(object sender, MouseButtonEventArgs e)
         {
-
+            BO.Task? taskInList = (sender as ListView)?.SelectedItem as BO.Task;
+            int id = taskInList!.Id;
+            new TaskWindow(id).ShowDialog();//Displaying a screen for updating the choosen task
         }
 
         private void Btn_AddClick(object sender, RoutedEventArgs e)
         {
+            new TaskWindow().ShowDialog();//Displaying a screen for adding an task
+        }
 
+        private void Cmb_StatusChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TaskList = Status == BO.Status.None ?
+           new(s_bl?.Task.ReadAll()!) : new(s_bl?.Task.ReadAll(item => item.StatusTask == Status)!);//If the choice changes then sort the tasks by choice
         }
     }
 }

@@ -33,11 +33,11 @@
                             <Setter Property="Background" Value="PaleTurquoise"/>
                         </Style>
                     </GridView.ColumnHeaderContainerStyle>
-                    <GridViewColumn  Header="ID" DisplayMemberBinding="{Binding Id}" Width="70"/>
+                    <GridViewColumn  Header="ID" DisplayMemberBinding="{Binding Id}" Width="100"/>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="180"/>
                     <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" Width="180"/>
-                    <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Level}" Width="180"/>
-                    <GridViewColumn Header="Cost" DisplayMemberBinding="{Binding Cost}" Width="70"/>
+                    <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Level}" Width="160"/>
+                    <GridViewColumn Header="Cost" DisplayMemberBinding="{Binding Cost}" Width="80"/>
                 </GridView>
             </ListView.View>
         </ListView>

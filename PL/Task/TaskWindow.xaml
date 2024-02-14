@@ -5,8 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
-        Title="TaskWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="TaskWindow" Height="800" Width="907"
+        DataContext="{Binding Task, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+
+    <Grid Margin="0,0,0,-6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="258*"/>
+            <ColumnDefinition Width="337*"/>
+            <ColumnDefinition Width="337*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Task Details" HorizontalAlignment="Left" VerticalAlignment="Top" Height="73" Width="237" FontSize="35" FontWeight="Bold" Margin="53,0,0,0" Grid.RowSpan="2" Grid.Column="1"/>
+        <Label Grid.Row="1" Content="Description" HorizontalAlignment="Left" VerticalAlignment="Center" Height="44" Width="144" FontSize="25" Margin="71,0,0,0"/>
+        <Label Grid.Row="2" Content="Alias" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="112" FontSize="25" Margin="71,0,0,0"/>
+        <Label Grid.Row="3" Content="Status" HorizontalAlignment="Left" VerticalAlignment="Center" Height="44" Width="112" FontSize="25" Margin="71,0,0,0"/>
+        <Label Grid.Row="3" Content="Create At" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="168" FontSize="25" Margin="71,54,0,0" Grid.RowSpan="2"/>
+        <Label Grid.Row="5" Content="Start" HorizontalAlignment="Left" VerticalAlignment="Center" Height="44" Width="112" FontSize="25" Margin="71,0,0,0"/>
+        <Label Grid.Row="6" Content="Deadline" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="112" FontSize="25" Margin="71,0,0,0"/>
+        <Label Grid.Row="7" Content="Scheduled Date" HorizontalAlignment="Left" VerticalAlignment="Center" Height="44" Width="210" FontSize="25" Margin="70,0,0,0" Grid.ColumnSpan="2"/>
+        <Label Grid.Row="8" Content="Complete" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="138" FontSize="25" Margin="71,0,0,0"/>
+        <Label Grid.Row="9" Content="Complexity Level" HorizontalAlignment="Left" VerticalAlignment="Center" Height="44" Width="210" FontSize="25" Margin="70,0,0,0" Grid.ColumnSpan="2"/>
+        <Label Grid.Row="10" Content="Engineer Id" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="184" FontSize="25" Margin="70,0,0,0" Grid.ColumnSpan="2"/>
+        <Label Grid.Row="11" Content="Deliverables" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="183" FontSize="25" Grid.ColumnSpan="2" Margin="70,1,0,0"/>
+        <Label Grid.Row="12" Content="Remarks" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="112" FontSize="25" Margin="71,0,0,0"/>
+        <Label Grid.Row="6" Content="Dependencies" HorizontalAlignment="Left" VerticalAlignment="Center" Height="44" Width="200" FontSize="25" Margin="37,0,0,0" Grid.Column="2"/>
+
+
+        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="232" Height="29" FontSize="16" Margin="53,10,0,0"/>
+        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="232" Height="29" FontSize="16" Margin="53,0,0,0"/>
+        <ComboBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource StatusCollectionKey}}" SelectedValue="{Binding StatusTask, Mode=TwoWay}" VerticalAlignment="Top" Width="232" Height="29" FontSize="16" Margin="53,10,0,0"/>
+        <DatePicker Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" SelectedDate="{Binding CreateAt, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="232" Height="29" FontSize="16" Margin="53,0,0,0"/>
+        <DatePicker Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" SelectedDate="{Binding Start, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="232" Height="29" FontSize="16" Margin="53,10,0,0"/>
+        <DatePicker Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" SelectedDate="{Binding Deadline, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="232" Height="29" FontSize="16" Margin="53,0,0,0"/>
+        <DatePicker Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" SelectedDate="{Binding ScheduledDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="232" Height="29" FontSize="16" Margin="53,10,0,0"/>
+        <DatePicker Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left"  SelectedDate="{Binding Complete, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="232" Height="29" FontSize="16" Margin="53,0,0,0"/>
+        <ComboBox Grid.Row="9" Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionKey}}" SelectedValue="{Binding ComplexityLevel, Mode=TwoWay}" VerticalAlignment="Top" Width="232" Height="29" FontSize="16" Margin="53,10,0,0"/>
+        <ComboBox Grid.Row="10" Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource EngineerCollectionKey}}" SelectedValue="{Binding Engineer.Id}" VerticalAlignment="Center" Width="232" Height="29" FontSize="16" Margin="53,0,0,0"/>
+        <TextBox Grid.Row="11" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Deliverables, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="232" Height="29" FontSize="16" Margin="53,10,0,0"/>
+        <TextBox Grid.Row="12" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="232" Height="29" FontSize="16" Margin="53,0,0,0"/>
+
+        <ComboBox Grid.Row="7" Grid.Column="2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource DependenceListCollectionKey}}" SelectedValue="{Binding DependenceList}" VerticalAlignment="Center" Width="232" Height="29" FontSize="16" Margin="21,0,0,0"/>
+
+        <Button Grid.Row="13" Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Width="178" Margin="53,17,0,17" Click="BtnAddUpdate_Click" FontSize="20" Background="PaleTurquoise" FontWeight="Bold" Grid.Column="1"/>
     </Grid>
 </Window>

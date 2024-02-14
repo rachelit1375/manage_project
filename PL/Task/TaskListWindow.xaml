@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
-        Title="TaskListWindow" Height="482" Width="857"
+        Title="TaskListWindow" Height="712" Width="742"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Activated="Window_activity">
 
     <!--Extrnal Grid-->
@@ -19,11 +19,12 @@
         <!--Internal, Upper Grid-->
         <Grid Height="auto" Grid.Row="0" Width="auto">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="320*"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="311*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Filter by status" HorizontalAlignment="Left" Margin="253,0,0,0" VerticalAlignment="Center" Width="129" FontWeight="Bold" FontSize="14"/>
-            <ComboBox ItemsSource="{Binding Source={StaticResource StatusCollectionKey}}" SelectedValue="{Binding Status, Mode=TwoWay}" SelectionChanged="Cmb_StatusChanged" Margin="382,0,232,0" Grid.ColumnSpan="2" Background="PaleTurquoise"/>
+            <Label Grid.Column="0" Content="Filter by status" HorizontalAlignment="Left" Margin="205,0,0,0" VerticalAlignment="Center" Width="129" FontWeight="Bold" FontSize="14" Height="29"/>
+            <ComboBox ItemsSource="{Binding Source={StaticResource StatusCollectionKey}}" SelectedValue="{Binding Status, Mode=TwoWay}" Margin="339,6,218,10" Background="OldLace" SelectionChanged="Cmb_StatusChanged" Grid.ColumnSpan="3"/>
         </Grid>
         <ListView Margin="5,5,5,5" Grid.Row="1" ItemsSource="{Binding Path=TaskList}" MouseDoubleClick="Lv_UpdateClick">
             <ListView.View>
@@ -34,16 +35,15 @@
                         </Style>
                     </GridView.ColumnHeaderContainerStyle>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50"/>
-                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="120"/>
-                    <GridViewColumn Header="Alias" DisplayMemberBinding="{Binding Alias}" Width="120"/>
-                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="100"/>
-                    <GridViewColumn Header="StartDate" DisplayMemberBinding="{Binding StartDate}" Width="150"/>
-                    <GridViewColumn Header="Task" DisplayMemberBinding="{Binding Task}" Width="150"/>
-                    <GridViewColumn Header="ComplexityLevel" DisplayMemberBinding="{Binding ComplexityLevel}" Width="150"/>
+                    <GridViewColumn Header="Alias" DisplayMemberBinding="{Binding Alias}" Width="100"/>
+                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding StatusTask}" Width="90"/>
+                    <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding Start}" Width="150"/>
+                    <GridViewColumn Header="Deadline" DisplayMemberBinding="{Binding Deadline}" Width="150"/>
+                    <GridViewColumn Header="Complexity Level" DisplayMemberBinding="{Binding ComplexityLevel}" Width="160"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Width="100" Click="Btn_AddClick" Margin="0,3,0,20" Background="PaleTurquoise" FontSize="20" FontWeight="Bold"/>
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Width="100" Click="Btn_AddClick" Margin="0,12,0,11" Background="PaleTurquoise" FontSize="20" FontWeight="Bold"/>
     </Grid>
 </Window>
 

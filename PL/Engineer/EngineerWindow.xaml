@@ -23,16 +23,19 @@
             <ColumnDefinition Width="141*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Engineer Details" HorizontalAlignment="Left" VerticalAlignment="Center" Height="73" Width="382" FontSize="35" FontWeight="Bold" Grid.ColumnSpan="2" Margin="108,0,0,0"/>
-        <Label Grid.Row="1" Content="id" HorizontalAlignment="Left" VerticalAlignment="Center" Height="44" Width="112" FontSize="25" FontWeight="Bold" Grid.ColumnSpan="2" Margin="78,0,0,0"/>
-        <Label Grid.Row="2" Content="name" HorizontalAlignment="Left" VerticalAlignment="Center" Height="44" Width="112" FontSize="25" FontWeight="Bold" Grid.ColumnSpan="2" Margin="78,0,0,0"/>
-        <Label Grid.Row="3" Content="email" HorizontalAlignment="Left" VerticalAlignment="Center" Height="44" Width="112" FontSize="25" FontWeight="Bold" Grid.ColumnSpan="2" Margin="78,0,0,0"/>
-        <Label Grid.Row="4" Content="level" HorizontalAlignment="Left" VerticalAlignment="Center" Height="44" Width="112" FontSize="25" FontWeight="Bold" Grid.ColumnSpan="2" Margin="78,0,0,0"/>
-        <Label Grid.Row="5" Content="cost" HorizontalAlignment="Left" VerticalAlignment="Center" Height="44" Width="112" FontSize="25" FontWeight="Bold" Grid.ColumnSpan="2" Margin="78,0,0,0"></Label>
-        <Button Grid.Row="6" Grid.Column="1" Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Width="130" Margin="38,50,0,49" Click="BtnAddUpdate_Click" FontSize="20" Background="PaleTurquoise"/>
+        <Label Grid.Row="1" Content="Id" HorizontalAlignment="Left" VerticalAlignment="Center" Height="44" Width="112" FontSize="25" Grid.ColumnSpan="2" Margin="78,0,0,0"/>
+        <Label Grid.Row="2" Content="Name" HorizontalAlignment="Left" VerticalAlignment="Center" Height="44" Width="112" FontSize="25" Grid.ColumnSpan="2" Margin="78,0,0,0"/>
+        <Label Grid.Row="3" Content="Email" HorizontalAlignment="Left" VerticalAlignment="Center" Height="44" Width="112" FontSize="25" Grid.ColumnSpan="2" Margin="78,0,0,0"/>
+        <Label Grid.Row="4" Content="Level" HorizontalAlignment="Left" VerticalAlignment="Center" Height="44" Width="112" FontSize="25" Grid.ColumnSpan="2" Margin="78,0,0,0"/>
+        <Label Grid.Row="5" Content="Cost" HorizontalAlignment="Left" VerticalAlignment="Center" Height="44" Width="112" FontSize="25" Grid.ColumnSpan="2" Margin="78,0,0,0"/>
+
+
         <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="232" Height="29" FontSize="16" Margin="48,0,0,0"/>
         <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="232" Height="29" FontSize="16" Margin="48,0,0,0"/>
         <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="232" Height="29" FontSize="16" Margin="48,0,0,0"/>
         <ComboBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionKey}}" SelectedValue="{Binding Level, Mode=TwoWay}" VerticalAlignment="Center" Width="232" Height="29" FontSize="16" Margin="48,0,0,0"/>
         <TextBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="232" Height="29" FontSize="16" Margin="48,0,0,0"/>
+        
+        <Button Grid.Row="6" Grid.Column="1" Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Width="130" Margin="38,50,0,49" Click="BtnAddUpdate_Click" FontSize="20" Background="PaleTurquoise" FontWeight="Bold"/>
     </Grid>
 </Window>

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Handle Tasks" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="168" Click="BtnEngineer_Click" FontSize="18" FontWeight="Bold" FontFamily="Artifakt Element" Background="WhiteSmoke"/>
+        <Button Content="Handle Tasks" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="168" Click="BtnTask_Click" FontSize="18" FontWeight="Bold" FontFamily="Artifakt Element" Background="WhiteSmoke"/>
         <Button Content="Init DB" HorizontalAlignment="Left" Height="100" Margin="515,0,0,0" VerticalAlignment="Center" Width="168" Click="BtnInitialize_Click" FontSize="18" FontWeight="Bold" FontFamily="Artifakt Element" Background="WhiteSmoke"/>
         <Button Content="Handle Engineers" HorizontalAlignment="Left" Height="100" Margin="105,0,0,0" VerticalAlignment="Center" Width="168" Click="BtnEngineer_Click" FontSize="18" FontWeight="Bold" FontFamily="Artifakt Element" Background="WhiteSmoke"/>
 

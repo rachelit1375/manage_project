@@ -24,7 +24,7 @@ public static class Tools
     public static void CheckName(string? name)
     {
         if (name == null)//If this is an empty string
-            throw new BO.BlPropertyException($"You need to enter a name");//
+            throw new BO.BlPropertyException($"You need to enter a value");//
     }
     public static void CheckCost(double? cost)
     {

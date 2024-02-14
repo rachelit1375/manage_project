@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace PL.Engineer
@@ -42,7 +43,7 @@ namespace PL.Engineer
                     MessageBox.Show($"Engineer {id} added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
                 }
-                catch (BO.BlAlreadyExistsException ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
@@ -55,7 +56,7 @@ namespace PL.Engineer
                     MessageBox.Show($"Engineer {Engineer.Id} updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
                 }
-                catch (BO.BlDoesNotExistException ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }

@@ -7,5 +7,7 @@
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:EngineerExperienceCollection x:Key="EngineerExperienceCollectionKey" />
         <local:StatusCollection x:Key="StatusCollectionKey" />
+        <local:EngineerCollection x:Key="EngineerCollectionKey" />
+        <local:DependenceListCollection x:Key="DependenceListCollectionKey" />
     </Application.Resources>
 </Application>

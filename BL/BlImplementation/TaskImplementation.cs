@@ -10,17 +10,21 @@ internal class TaskImplementation : ITask
 
     public int Create(BO.Task item)
     {
-        BO.Tools.CheckId(item.Id);// validation
         BO.Tools.CheckName(item.Alias);
-        var dependencesTask = (from dependence in item.DependenceList
-                               select _dal.Dependence.Create(new DO.Dependence(0, dependence.Id, item.Id)));//building the dependencies
+
 
         int? idEngineer = null;
         if (item.Engineer != null)
             idEngineer = item.Engineer.Id;
 
-        _dal.Task.Create(new DO.Task(0, item.Description, item.Alias, false, DateTime.Today, item.Start, item.ScheduledDate, item.Deadline, item.Complete, item.Deliverables, item.Remarks, idEngineer, (DO.EngineerExperience)item.ComplexityLevel!, null));//maybe true in the milestone
-        return item.Id;
+        int newID = _dal.Task.Create(new DO.Task(0, item.Description, item.Alias, false, DateTime.Today, item.Start, item.ScheduledDate, item.Deadline, item.Complete, item.Deliverables, item.Remarks, idEngineer, (DO.EngineerExperience)item.ComplexityLevel!, null));//maybe true in the milestone
+        if (item.DependenceList != null)
+        {
+            var dependencesTask = (from dependence in item.DependenceList
+                                           select _dal.Dependence.Create(new DO.Dependence(0, dependence.Id, newID)));//building the dependencies
+        }
+        
+        return newID;
     }
 
     public void Delete(int id)
@@ -67,9 +71,9 @@ internal class TaskImplementation : ITask
                                   Alias = taskDependOn?.Alias,
                                   Status = GetStatus(taskDependOn)
                               });//Goes through the dependencies and checks if this is a task that depends on it, if so builds a taskinlist
-        return (List<TaskInList>)dependentTasks;
+        return dependentTasks.ToList<TaskInList>();
     }
-    public Status GetStatus(DO.Task doTask)//This operation calculates the status of the task
+    public static Status GetStatus(DO.Task doTask)//This operation calculates the status of the task
     {
         if (doTask.Complete != null && doTask.Complete <= DateTime.Now)
             return Status.Complete;
@@ -87,11 +91,9 @@ internal class TaskImplementation : ITask
     }
     public BO.Task? Read(int id)
     {
-        DO.Task? doTask = _dal.Task.Read(id);
-        if (doTask == null)//Checking whether there is such an engineer
-            throw new BO.BlDoesNotExistException($"Task {id} doesn't exists");
-
+        DO.Task? doTask = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task {id} doesn't exists");
         BO.EngineerInTask? engineerInTask = null;
+
         if (doTask?.EngineerId != null)
             engineerInTask = new BO.EngineerInTask() { Id = (int)doTask.EngineerId, Name = _dal.Engineer.Read((int)doTask.EngineerId)?.Name };//building of the engineer
 
@@ -135,7 +137,7 @@ internal class TaskImplementation : ITask
                     Complete = doTask.Complete,
                     Deliverables = doTask?.Deliverables,
                     Remarks = doTask?.Remarks,
-                    Engineer = taskEngineer == null? null : new EngineerInTask()
+                    Engineer = taskEngineer == null ? null : new EngineerInTask()
                     {
                         Id = taskEngineer.Id,
                         Name = taskEngineer?.Name
