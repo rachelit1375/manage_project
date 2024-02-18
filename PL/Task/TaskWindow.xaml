@@ -60,7 +60,7 @@
         <Label Grid.Row="3" Grid.Column="2" Content="Depends on" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="200" FontSize="25" Margin="53,10,0,0"/>
         <ListView Grid.Column="2" Grid.Row="4" ItemsSource="{Binding Path=Dependence}" Margin="45,25,114,30" Grid.RowSpan="3"/>
         <Label Grid.Row="7" Grid.Column="2" Content="Add Dependence" HorizontalAlignment="Left" Width="200" FontSize="25" Margin="46,6,0,5"/>
-        <ComboBox Grid.Row="8" Grid.Column="2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource DependenceListCollectionKey}}" VerticalAlignment="Center" Width="232" Height="29" FontSize="16" Margin="29,0,0,0" SelectionChanged="Cmb_DependenceChanged"/>
+        <ComboBox Grid.Row="8" Grid.Column="2" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource DependenceListCollectionKey}}" Width="232" FontSize="16" Margin="29,13,0,12" SelectionChanged="Cmb_DependenceChanged"/>
 
         <Button Grid.Row="13" Content="{Binding Task.Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Width="178" Margin="53,17,0,17" Click="BtnAddUpdate_Click" FontSize="20" Background="PaleTurquoise" FontWeight="Bold" Grid.Column="1"/>
     </Grid>

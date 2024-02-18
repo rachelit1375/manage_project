@@ -107,12 +107,20 @@ namespace PL.Task
                   DependencyProperty.Register("Dependence", typeof(List<BO.TaskInList>), typeof(TaskWindow), new PropertyMetadata(null));
 
         private void Cmb_DependenceChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //int selectedIndex = (sender as ComboBox)!.SelectedIndex;
-            //var selectedValue = (sender as ComboBox)!.SelectedValue;
-
-            //Task.DependenceList[selectedIndex].Alias = selectedValue.ToString();
-            //Task.DependenceList?.Add();
+        {          
+            if ((sender as ComboBox)?.SelectedValue != null)
+            {
+                var newDependence = (from task in s_bl.Task.ReadAll()
+                         where task.Alias == (sender as ComboBox)!.SelectedValue.ToString()
+                         select new TaskInList()
+                         {
+                             Id = task.Id,
+                             Description = task.Description,
+                             Alias = task.Alias,
+                             Status = task.StatusTask
+                         }).FirstOrDefault();
+                Task.DependenceList?.Add(newDependence!);
+            }
         }
     }
 }

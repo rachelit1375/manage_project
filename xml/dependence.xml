@@ -20,4 +20,14 @@
     <DependentOnTask>4</DependentOnTask>
     <DependentTask>5</DependentTask>
   </Dependence>
+  <Dependence>
+    <Id>5</Id>
+    <DependentOnTask>6</DependentOnTask>
+    <DependentTask>2</DependentTask>
+  </Dependence>
+  <Dependence>
+    <Id>6</Id>
+    <DependentOnTask>5</DependentOnTask>
+    <DependentTask>10</DependentTask>
+  </Dependence>
 </ArrayOfDependence>

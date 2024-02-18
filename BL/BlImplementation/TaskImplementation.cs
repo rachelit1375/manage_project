@@ -1,12 +1,13 @@
 ﻿
 using BlApi;
 using BO;
+using DO;
 
 namespace BlImplementation;
 
 internal class TaskImplementation : ITask
 {
-    private DalApi.IDal _dal = DalApi.Factory.Get;
+    private readonly DalApi.IDal _dal = DalApi.Factory.Get;
 
     public int Create(BO.Task item)
     {
@@ -20,10 +21,12 @@ internal class TaskImplementation : ITask
         int newID = _dal.Task.Create(new DO.Task(0, item.Description, item.Alias, false, DateTime.Today, item.Start, item.ScheduledDate, item.Deadline, item.Complete, item.Deliverables, item.Remarks, idEngineer, (DO.EngineerExperience)item.ComplexityLevel!, null));//maybe true in the milestone
         if (item.DependenceList != null)
         {
-            var dependencesTask = (from dependence in item.DependenceList
-                                           select _dal.Dependence.Create(new DO.Dependence(0, dependence.Id, newID)));//building the dependencies
+            foreach (var singleDependence in item.DependenceList)//building the dependencies
+            {
+                    _dal.Dependence.Create(new Dependence(0, singleDependence.Id, newID));
+            }
         }
-        
+
         return newID;
     }
 
@@ -113,7 +116,7 @@ internal class TaskImplementation : ITask
             Deliverables = doTask?.Deliverables,
             Remarks = doTask?.Remarks,
             Engineer = engineerInTask,
-            ComplexityLevel = (EngineerExperience?)doTask!.ComplexityLevel,
+            ComplexityLevel = (BO.EngineerExperience?)doTask!.ComplexityLevel,
         };
     }
 
@@ -142,7 +145,7 @@ internal class TaskImplementation : ITask
                         Id = taskEngineer.Id,
                         Name = taskEngineer?.Name
                     },
-                    ComplexityLevel = (EngineerExperience?)doTask!.ComplexityLevel,
+                    ComplexityLevel = (BO.EngineerExperience?)doTask!.ComplexityLevel,
                 };
 
         if (filter == null)
@@ -163,6 +166,21 @@ internal class TaskImplementation : ITask
         catch (Exception ex)
         {
             throw new BO.BlDoesNotExistException($"Task {item.Id} doesn't exists", ex);
+        }
+
+        if (item.DependenceList != null)
+        {
+            foreach (var singleDependence in item.DependenceList)
+            {
+                bool isExist = false;
+                foreach (var dependence in _dal.Dependence.ReadAll())
+                {
+                    if (dependence!.Id == singleDependence.Id)
+                        isExist = true;
+                }
+                if (!isExist)
+                    _dal.Dependence.Create(new Dependence(0, singleDependence.Id, item.Id));
+            }
         }
     }
 }

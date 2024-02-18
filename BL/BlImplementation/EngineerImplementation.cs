@@ -7,7 +7,7 @@ namespace BlImplementation;
 
 internal class EngineerImplementation : IEngineer
 {
-    private DalApi.IDal _dal = DalApi.Factory.Get;
+    private readonly DalApi.IDal _dal = DalApi.Factory.Get;
 
     public int Create(BO.Engineer item)
     {
