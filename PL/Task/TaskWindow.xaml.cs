@@ -108,11 +108,11 @@ namespace PL.Task
 
         private void Cmb_DependenceChanged(object sender, SelectionChangedEventArgs e)
         {          
-            if ((sender as ComboBox)?.SelectedValue != null)
-            {
+            if ((sender as ComboBox)?.SelectedValue != null)//If a new dependency is selected
+            {//We will add the selected dependency to the task's dependency list
                 var newDependence = (from task in s_bl.Task.ReadAll()
                          where task.Alias == (sender as ComboBox)!.SelectedValue.ToString()
-                         select new TaskInList()
+                         select new TaskInList()//
                          {
                              Id = task.Id,
                              Description = task.Description,

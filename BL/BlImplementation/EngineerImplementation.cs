@@ -95,7 +95,7 @@ internal class EngineerImplementation : IEngineer
         Tools.CheckName(item.Name);
         Tools.CheckCost(item.Cost);
         Tools.CheckEmail(item.Email);
-        DO.Engineer doEngineer = new DO.Engineer(item.Id, item.Name!, item.Email!, (DO.EngineerExperience?)item.Level, item.Cost, item.Active);
+        DO.Engineer doEngineer = new DO.Engineer(item.Id, item.Name!, item.Email!, (DO.EngineerExperience?)item.Level!, item.Cost, item.Active);
         try
         {
             _dal.Engineer.Update(doEngineer);

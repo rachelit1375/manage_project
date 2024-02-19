@@ -167,18 +167,18 @@ internal class TaskImplementation : ITask
         {
             throw new BO.BlDoesNotExistException($"Task {item.Id} doesn't exists", ex);
         }
-
-        if (item.DependenceList != null)
+        
+        if (item.DependenceList != null)//If it has a list of dependencies, it checks that the new dependency does not already exist - prevents duplication
         {
             foreach (var singleDependence in item.DependenceList)
             {
                 bool isExist = false;
                 foreach (var dependence in _dal.Dependence.ReadAll())
                 {
-                    if (dependence!.Id == singleDependence.Id)
+                    if (dependence!.DependentOnTask == singleDependence.Id && dependence!.DependentTask == item.Id)
                         isExist = true;
                 }
-                if (!isExist)
+                if (!isExist)//The dependency does not appear - adds it
                     _dal.Dependence.Create(new Dependence(0, singleDependence.Id, item.Id));
             }
         }

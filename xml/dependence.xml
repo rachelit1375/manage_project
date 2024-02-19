@@ -28,6 +28,21 @@
   <Dependence>
     <Id>6</Id>
     <DependentOnTask>5</DependentOnTask>
-    <DependentTask>10</DependentTask>
+    <DependentTask>9</DependentTask>
+  </Dependence>
+  <Dependence>
+    <Id>7</Id>
+    <DependentOnTask>5</DependentOnTask>
+    <DependentTask>2</DependentTask>
+  </Dependence>
+  <Dependence>
+    <Id>8</Id>
+    <DependentOnTask>7</DependentOnTask>
+    <DependentTask>2</DependentTask>
+  </Dependence>
+  <Dependence>
+    <Id>9</Id>
+    <DependentOnTask>4</DependentOnTask>
+    <DependentTask>7</DependentTask>
   </Dependence>
 </ArrayOfDependence>

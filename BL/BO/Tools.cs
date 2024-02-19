@@ -28,7 +28,7 @@ public static class Tools
     }
     public static void CheckCost(double? cost)
     {
-        if (cost == null || cost < 0)//<=If it is a negative number
+        if ( cost < 0)//<=If it is a negative number
             throw new BO.BlPropertyException($"The amount to be paid is invalid");//
     }
     public static void CheckEmail(string? email) 
